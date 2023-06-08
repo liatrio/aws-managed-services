@@ -57,7 +57,7 @@ resource "grafana_folder" "this" {
 }
 
 module "managed_prometheus" {
-  source = "git@github.com:liatrio/managed-prometheus-monitoring.git?ref=prometheus"
+  source = "git@github.com:liatrio/managed-prometheus-monitoring.git?ref=main"
   #source = "/Users/paulhenson/liatrio/repos/managed-prometheus-monitoring"
   #version = "0.0.1"
 
