@@ -70,21 +70,22 @@ module "managed_prometheus" {
 
 # fetch user (could also be a group https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/identitystore_group)
 # the instance has to be fetched first and it doesn't require any arguments
-data "aws_ssoadmin_instances" "instances" {}
-data "aws_identitystore_user" "user" {
-  identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
+# data "aws_ssoadmin_instances" "instances" {}
+# data "aws_identitystore_user" "user" {
+#   identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
 
-  alternate_identifier {
-    unique_attribute {
-      attribute_path  = "UserName"
-      attribute_value = "o11yTestUser" #TODO: Change this to be a variable
-    }
-  }
-}
+#   alternate_identifier {
+#     unique_attribute {
+#       attribute_path  = "UserName"
+#       attribute_value = "o11yTestUser" #TODO: Change this to be a variable
+#     }
+#   }
+# }
 
 module "managed_grafana" {
-  source  = "terraform-aws-modules/managed-service-grafana/aws"
-  version = "1.8.0"
+  #source  = "terraform-aws-modules/managed-service-grafana/aws"
+  source = "/Users/paulhenson/liatrio/repos/terraform-aws-managed-service-grafana"
+  #version = "1.8.0"
 
   name                      = local.name
   associate_license         = false
@@ -123,14 +124,14 @@ module "managed_grafana" {
     }
   })
 
-  role_associations = {
-    "ADMIN" = {
-      "user_ids" = [data.aws_identitystore_user.user.user_id]
-    }
-    # "EDITOR" = {
-    #   "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
-    # }
-  }
+  # role_associations = {
+  #   "ADMIN" = {
+  #     "user_ids" = [data.aws_identitystore_user.user.user_id]
+  #   }
+  #   # "EDITOR" = {
+  #   #   "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
+  #   # }
+  # }
 
 
   # Workspace IAM role
