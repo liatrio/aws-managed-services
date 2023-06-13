@@ -1,5 +1,5 @@
 data "aws_region" "current" {
-  name = "us-east-1"
+  name = var.aws_region
 }
 
 data "aws_grafana_workspace" "this" {
