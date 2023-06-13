@@ -1,3 +1,5 @@
+//TODO: Move the grafana module in the `modules/grafana` folder
+
 locals {
   #name        = local.locals_vars.locals.name
   description = "Amazon Managed Grafana workspace for ${local.name}"
@@ -57,8 +59,7 @@ resource "grafana_folder" "this" {
 }
 
 module "managed_prometheus" {
-  source = "git@github.com:liatrio/managed-prometheus-monitoring.git?ref=main"
-  #source = "/Users/paulhenson/liatrio/repos/managed-prometheus-monitoring"
+  source = "./modules/prometheus"
   #version = "0.0.1"
 
   aws_region                      = local.amp_ws_region
@@ -83,8 +84,7 @@ module "managed_prometheus" {
 # }
 
 module "managed_grafana" {
-  #source  = "terraform-aws-modules/managed-service-grafana/aws"
-  source = "/Users/paulhenson/liatrio/repos/terraform-aws-managed-service-grafana"
+  source  = "terraform-aws-modules/managed-service-grafana/aws"
   #version = "1.8.0"
 
   name                      = local.name
