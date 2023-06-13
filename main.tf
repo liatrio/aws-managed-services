@@ -1,3 +1,5 @@
+//TODO: Move the grafana module in the `modules/grafana` folder
+
 locals {
   #name        = local.locals_vars.locals.name
   description = "Amazon Managed Grafana workspace for ${local.name}"
@@ -82,8 +84,7 @@ module "managed_prometheus" {
 # }
 
 module "managed_grafana" {
-  #source  = "terraform-aws-modules/managed-service-grafana/aws"
-  source = "/Users/paulhenson/liatrio/repos/terraform-aws-managed-service-grafana"
+  source  = "terraform-aws-modules/managed-service-grafana/aws"
   #version = "1.8.0"
 
   name                      = local.name
