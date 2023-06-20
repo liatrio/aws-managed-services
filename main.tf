@@ -4,11 +4,13 @@ locals {
   #name        = local.locals_vars.locals.name
   description = "Amazon Managed Grafana workspace for ${local.name}"
 
+
   tags = {
     GithubRepo = "terraform-aws-observability-accelerator"
     GithubOrg  = "aws-observability"
   }
   grafana_iam_role_name = module.managed_grafana.workspace_iam_role_name
+  iam_role_name = "aws-observability-workspace-iam-role"
 }
 
 
@@ -47,7 +49,7 @@ resource "grafana_data_source" "amp" {
   json_data {
     http_method     = "GET"
     sigv4_auth      = true
-    sigv4_auth_type = "workspace-iam-role"
+    sigv4_auth_type = local.iam_role_name
     sigv4_region    = local.amp_ws_region
   }
 }
@@ -136,7 +138,7 @@ module "managed_grafana" {
 
   # Workspace IAM role
   create_iam_role                = true
-  iam_role_name                  = "workspace-iam-role"
+  iam_role_name                  = local.iam_role_name
   use_iam_role_name_prefix       = true
   iam_role_description           = local.description
   iam_role_path                  = "/grafana/"
