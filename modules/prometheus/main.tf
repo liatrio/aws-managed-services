@@ -7,6 +7,7 @@ locals {
   name     = "aws-observability-accelerator-cloudwatch"
   #amp_list = toset(split(",", var.managed_prometheus_workspace_ids))
   amp_list = var.managed_prometheus_workspace_ids
+  iam_role_name = "aws-observability-workspace-iam-role"
 }
 
 resource "grafana_data_source" "cloudwatch" {
@@ -18,7 +19,7 @@ resource "grafana_data_source" "cloudwatch" {
   json_data {
     default_region  = var.aws_region
     sigv4_auth      = true
-    sigv4_auth_type = "workspace-iam-role"
+    sigv4_auth_type = local.iam_role_name
     sigv4_region    = var.aws_region
   }
 }
