@@ -93,3 +93,13 @@ variable "create_saml_configuration" {
   type        = string
   default     = false
 }
+
+variable "saml_admin_role_values" {
+  description = "Name of the admin role value."
+  type        = list
+}
+
+variable "saml_editor_role_values" {
+  description = "Name of the editor role value."
+  type        = list
+}
