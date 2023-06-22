@@ -103,3 +103,8 @@ variable "saml_editor_role_values" {
   description = "Name of the editor role value."
   type        = list
 }
+
+variable "saml_email_assertion" {
+  description = "Name of the editor role value."
+  type        = string
+}

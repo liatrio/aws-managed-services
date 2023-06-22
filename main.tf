@@ -152,9 +152,9 @@ module "managed_grafana" {
   # SAML configuration
   create_saml_configuration      = var.create_saml_configuration
 
-  saml_admin_role_values         = var.create_saml_configuration ? var.saml_admin_role_values : ["admin"]
-  saml_editor_role_values        = var.create_saml_configuration ? var.saml_editor_role : ["editor"]
-  saml_email_assertion           = "mail"
+  saml_admin_role_values         = var.create_saml_configuration ? var.saml_admin_role_values : []
+  saml_editor_role_values        = var.create_saml_configuration ? var.saml_editor_role : []
+  saml_email_assertion           = var.create_saml_configuration ? var.saml_email_assertion : ""
   saml_groups_assertion          = "groups"
   saml_login_assertion           = "mail"
   saml_name_assertion            = "displayName"
