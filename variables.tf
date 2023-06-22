@@ -94,6 +94,11 @@ variable "create_saml_configuration" {
   default     = false
 }
 
+variable "authentication_providers" {
+  description = "List containing the methods used to authenticate."
+  type        = list
+}
+
 variable "saml_admin_role_values" {
   description = "Name of the admin role value."
   type        = list
