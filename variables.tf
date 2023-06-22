@@ -87,3 +87,9 @@ variable "iam_role_arn" {
   type        = string
   default     = null
 }
+
+variable "create_saml_configuration" {
+  description = "Flag to indicate whether or not to create a SAML configuratino in Grafana Workspace."
+  type        = string
+  default     = false
+}

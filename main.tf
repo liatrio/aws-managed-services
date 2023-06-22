@@ -132,7 +132,8 @@ module "managed_grafana" {
   #   #   "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
   #   # }
   # }
-
+  # SAML configuration
+    
 
   # Workspace IAM role
   create_iam_role                = true
@@ -145,4 +146,7 @@ module "managed_grafana" {
   iam_role_tags                  = local.tags
 
   tags = local.tags
+
+  create_saml_configuration      = false
+
 }
