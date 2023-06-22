@@ -126,17 +126,6 @@ module "managed_grafana" {
     }
   })
 
-  # role_associations = {
-  #   "ADMIN" = {
-  #     "user_ids" = [data.aws_identitystore_user.user.user_id]
-  #   }
-  #   # "EDITOR" = {
-  #   #   "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
-  #   # }
-  # }
-
-    
-
   # Workspace IAM role
   create_iam_role                = true
   iam_role_name                  = local.iam_role_name
@@ -149,7 +138,7 @@ module "managed_grafana" {
 
   tags = local.tags
 
-  # SAML configuration
+  # SAML configuration settings
   create_saml_configuration      = var.create_saml_configuration
 
   saml_admin_role_values         = var.create_saml_configuration ? var.saml_admin_role_values : []
@@ -168,11 +157,11 @@ module "managed_grafana" {
   # WARNING: https://github.com/hashicorp/terraform-provider-aws/issues/24166
   # role_associations = {
   #   "ADMIN" = {
-  #     "group_ids" = ["1111111111-abcdefgh-1234-5678-abcd-999999999999"]
+  #     "user_ids" = [data.aws_identitystore_user.user.user_id]
   #   }
-  #   "EDITOR" = {
-  #     "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
-  #   }
+  #   # "EDITOR" = {
+  #   #   "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
+  #   # }
   # }
 
 
