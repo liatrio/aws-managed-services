@@ -105,6 +105,31 @@ variable "saml_editor_role_values" {
 }
 
 variable "saml_email_assertion" {
-  description = "Name of the editor role value."
+  description = "Name of the saml email used for assertion."
+  type        = string
+}
+
+variable "saml_groups_assertion" {
+  description = "Name of the saml groups used for assertion."
+  type        = string
+}
+variable "saml_login_assertion" {
+  description = "Method of login used for assertion."
+  type        = string
+}
+variable "saml_name_assertion" {
+  description = "Display name for SAML."
+  type        = string
+}
+variable "saml_org_assertion" {
+  description = "Name of the org used for assertion."
+  type        = string
+}
+variable "saml_role_assertion" {
+  description = "Name of the role used for assertion."
+  type        = string
+}
+variable "saml_idp_metadata_url" {
+  description = "IDP Meta data url."
   type        = string
 }

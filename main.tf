@@ -155,12 +155,12 @@ module "managed_grafana" {
   saml_admin_role_values         = var.create_saml_configuration ? var.saml_admin_role_values : []
   saml_editor_role_values        = var.create_saml_configuration ? var.saml_editor_role : []
   saml_email_assertion           = var.create_saml_configuration ? var.saml_email_assertion : ""
-  saml_groups_assertion          = "groups"
-  saml_login_assertion           = "mail"
-  saml_name_assertion            = "displayName"
-  saml_org_assertion             = "org"
-  saml_role_assertion            = "role"
-  saml_idp_metadata_url          = "https://my_idp_metadata.url"
+  saml_groups_assertion          = var.create_saml_configuration ? var.saml_groups_assertion : ""
+  saml_login_assertion           = var.create_saml_configuration ? var.saml_login_assertion : ""
+  saml_name_assertion            = var.create_saml_configuration ? var.saml_name_assertion : ""
+  saml_org_assertion             = var.create_saml_configuration ? var.saml_org_assertion : ""
+  saml_role_assertion            = var.create_saml_configuration ? var.saml_role_assertion : ""
+  saml_idp_metadata_url          = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
 
   # Role associations
   # Ref: https://github.com/aws/aws-sdk/issues/25
