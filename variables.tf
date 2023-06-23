@@ -139,6 +139,7 @@ variable "saml_idp_metadata_url" {
   type        = string
 }
 
+// TODO: fix these description to match the description from the module
 variable "iam_role_name" {
   description = "The name of the IAM Role to create or associate with"
   type        = string
@@ -149,4 +150,10 @@ variable "use_iam_role_name_prefix" {
   description = "Whether or not to use a prefix on the IAM Role name"
   type        = bool
   default     = true
+}
+
+variable "account_access_type" {
+  description = "The account access type."
+  type        = string
+  default     = "CURRENT_ACCOUNT"
 }

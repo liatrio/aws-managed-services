@@ -89,10 +89,11 @@ module "managed_grafana" {
   source = "terraform-aws-modules/managed-service-grafana/aws"
   #version = "1.8.0"
 
-  name                      = local.name
-  associate_license         = false
-  description               = local.description
-  account_access_type       = "CURRENT_ACCOUNT"
+  name              = local.name
+  associate_license = false
+  description       = local.description
+  //account_access_type       = "CURRENT_ACCOUNT"
+  account_access_type       = var.account_access_type
   authentication_providers  = var.authentication_providers
   permission_type           = "SERVICE_MANAGED"
   data_sources              = ["CLOUDWATCH", "PROMETHEUS", "XRAY"]
