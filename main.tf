@@ -129,7 +129,7 @@ module "managed_grafana" {
   # Workspace IAM role
   create_iam_role                = true
   iam_role_name                  = local.iam_role_name
-  use_iam_role_name_prefix       = false
+  use_iam_role_name_prefix       = true
   iam_role_description           = local.description
   iam_role_path                  = "/grafana/"
   iam_role_force_detach_policies = true
