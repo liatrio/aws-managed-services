@@ -10,7 +10,7 @@ locals {
     GithubOrg  = "aws-observability"
   }
   grafana_iam_role_name = module.managed_grafana.workspace_iam_role_name
-  iam_role_name = "aws-observability-workspace-iam-role"
+  iam_role_name         = "aws-observability-workspace-iam-role"
 }
 
 
@@ -64,11 +64,11 @@ module "managed_prometheus" {
   source = "./modules/prometheus"
   #version = "0.0.1"
 
-  aws_region                      = local.amp_ws_region
-  dashboards_folder_id            = grafana_folder.this[0].id
+  aws_region                       = local.amp_ws_region
+  dashboards_folder_id             = grafana_folder.this[0].id
   managed_prometheus_workspace_ids = aws_prometheus_workspace.this[0].id
-  active_series_threshold         = 100000
-  ingestion_rate_threshold        = 70000
+  active_series_threshold          = 100000
+  ingestion_rate_threshold         = 70000
 }
 
 # fetch user (could also be a group https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/identitystore_group)
@@ -86,7 +86,7 @@ module "managed_prometheus" {
 # }
 
 module "managed_grafana" {
-  source  = "terraform-aws-modules/managed-service-grafana/aws"
+  source = "terraform-aws-modules/managed-service-grafana/aws"
   #version = "1.8.0"
 
   name                      = local.name
@@ -127,9 +127,9 @@ module "managed_grafana" {
   })
 
   # Workspace IAM role
-  create_iam_role                = true
-  iam_role_name                  = local.iam_role_name
-  use_iam_role_name_prefix       = true
+  create_iam_role                = var.create_iam_role ? true : false
+  iam_role_name                  = var.iam_role_name
+  use_iam_role_name_prefix       = var.use_iam_role_name_prefix
   iam_role_description           = local.description
   iam_role_path                  = "/grafana/"
   iam_role_force_detach_policies = true
@@ -139,17 +139,17 @@ module "managed_grafana" {
   tags = local.tags
 
   # SAML configuration settings
-  create_saml_configuration      = var.create_saml_configuration
+  create_saml_configuration = var.create_saml_configuration
 
-  saml_admin_role_values         = var.create_saml_configuration ? var.saml_admin_role_values : []
-  saml_editor_role_values        = var.create_saml_configuration ? var.saml_editor_role_values : []
-  saml_email_assertion           = var.create_saml_configuration ? var.saml_email_assertion : ""
-  saml_groups_assertion          = var.create_saml_configuration ? var.saml_groups_assertion : ""
-  saml_login_assertion           = var.create_saml_configuration ? var.saml_login_assertion : ""
-  saml_name_assertion            = var.create_saml_configuration ? var.saml_name_assertion : ""
-  saml_org_assertion             = var.create_saml_configuration ? var.saml_org_assertion : ""
-  saml_role_assertion            = var.create_saml_configuration ? var.saml_role_assertion : ""
-  saml_idp_metadata_url          = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
+  saml_admin_role_values  = var.create_saml_configuration ? var.saml_admin_role_values : []
+  saml_editor_role_values = var.create_saml_configuration ? var.saml_editor_role_values : []
+  saml_email_assertion    = var.create_saml_configuration ? var.saml_email_assertion : ""
+  saml_groups_assertion   = var.create_saml_configuration ? var.saml_groups_assertion : ""
+  saml_login_assertion    = var.create_saml_configuration ? var.saml_login_assertion : ""
+  saml_name_assertion     = var.create_saml_configuration ? var.saml_name_assertion : ""
+  saml_org_assertion      = var.create_saml_configuration ? var.saml_org_assertion : ""
+  saml_role_assertion     = var.create_saml_configuration ? var.saml_role_assertion : ""
+  saml_idp_metadata_url   = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
 
   # Role associations
   # Ref: https://github.com/aws/aws-sdk/issues/25

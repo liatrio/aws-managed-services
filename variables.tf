@@ -37,7 +37,7 @@ variable "managed_grafana_workspace_id" {
 variable "grafana_api_key" {
   description = "Grafana API key for the Amazon Managed Grafana workspace"
   type        = string
-  default = ""
+  default     = ""
 }
 
 variable "create_prometheus_data_source" {
@@ -96,17 +96,17 @@ variable "create_saml_configuration" {
 
 variable "authentication_providers" {
   description = "List containing the methods used to authenticate."
-  type        = list
+  type        = list(any)
 }
 
 variable "saml_admin_role_values" {
   description = "Name of the admin role value."
-  type        = list
+  type        = list(any)
 }
 
 variable "saml_editor_role_values" {
   description = "Name of the editor role value."
-  type        = list
+  type        = list(any)
 }
 
 variable "saml_email_assertion" {
@@ -137,4 +137,16 @@ variable "saml_role_assertion" {
 variable "saml_idp_metadata_url" {
   description = "IDP Meta data url."
   type        = string
+}
+
+variable "iam_role_name" {
+  description = "The name of the IAM Role to create or associate with"
+  type        = string
+  default     = "aws-observability-workspace-iam-role"
+}
+
+variable "use_iam_role_name_prefix" {
+  description = "Whether or not to use a prefix on the IAM Role name"
+  type        = bool
+  default     = true
 }
