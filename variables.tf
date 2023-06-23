@@ -37,7 +37,7 @@ variable "managed_grafana_workspace_id" {
 variable "grafana_api_key" {
   description = "Grafana API key for the Amazon Managed Grafana workspace"
   type        = string
-  default = ""
+  default     = ""
 }
 
 variable "create_prometheus_data_source" {
@@ -86,4 +86,74 @@ variable "iam_role_arn" {
   description = "Existing IAM role ARN for the workspace. Required if `create_iam_role` is set to `false`"
   type        = string
   default     = null
+}
+
+variable "create_saml_configuration" {
+  description = "Flag to indicate whether or not to create a SAML configuratino in Grafana Workspace."
+  type        = string
+  default     = false
+}
+
+variable "authentication_providers" {
+  description = "List containing the methods used to authenticate."
+  type        = list(any)
+}
+
+variable "saml_admin_role_values" {
+  description = "Name of the admin role value."
+  type        = list(any)
+}
+
+variable "saml_editor_role_values" {
+  description = "Name of the editor role value."
+  type        = list(any)
+}
+
+variable "saml_email_assertion" {
+  description = "Name of the saml email used for assertion."
+  type        = string
+}
+
+variable "saml_groups_assertion" {
+  description = "Name of the saml groups used for assertion."
+  type        = string
+}
+variable "saml_login_assertion" {
+  description = "Method of login used for assertion."
+  type        = string
+}
+variable "saml_name_assertion" {
+  description = "Display name for SAML."
+  type        = string
+}
+variable "saml_org_assertion" {
+  description = "Name of the org used for assertion."
+  type        = string
+}
+variable "saml_role_assertion" {
+  description = "Name of the role used for assertion."
+  type        = string
+}
+variable "saml_idp_metadata_url" {
+  description = "IDP Meta data url."
+  type        = string
+}
+
+// TODO: fix these description to match the description from the module
+variable "iam_role_name" {
+  description = "The name of the IAM Role to create or associate with"
+  type        = string
+  default     = "aws-observability-workspace-iam-role"
+}
+
+variable "use_iam_role_name_prefix" {
+  description = "Whether or not to use a prefix on the IAM Role name"
+  type        = bool
+  default     = true
+}
+
+variable "account_access_type" {
+  description = "The account access type."
+  type        = string
+  default     = "CURRENT_ACCOUNT"
 }
