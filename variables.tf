@@ -10,8 +10,20 @@ variable "enable_managed_prometheus" {
   default     = true
 }
 
+variable "rule_group_namespaces" {
+  description = "Creates a new Amazon Managed Service for Prometheus Rule Group Namespace"
+  type        = map
+  default     = {}
+}
+
 variable "managed_prometheus_workspace_id" {
   description = "Amazon Managed Service for Prometheus Workspace ID"
+  type        = string
+  default     = ""
+}
+
+variable "managed_prometheus_workspace_alias" {
+  description = "Amazon Managed Service for Prometheus Workspace Alias"
   type        = string
   default     = ""
 }
@@ -20,6 +32,11 @@ variable "managed_prometheus_workspace_region" {
   description = "Region where Amazon Managed Service for Prometheus is deployed"
   type        = string
   default     = null
+}
+
+variable "grafana_data_source_name" {
+  description = "Region where Amazon Managed Service for Prometheus is deployed"
+  type        = string
 }
 
 variable "enable_alertmanager" {
