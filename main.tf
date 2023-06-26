@@ -14,64 +14,56 @@ locals {
 }
 
 
-resource "aws_prometheus_workspace" "this" {
-  count = var.enable_managed_prometheus ? 1 : 0
+# resource "aws_prometheus_workspace" "this" {
+#   count = var.enable_managed_prometheus ? 1 : 0
 
-  alias = local.name
-  tags  = var.tags
-}
+#   alias = local.name
+#   tags  = var.tags
+# }
 
-resource "aws_prometheus_alert_manager_definition" "this" {
-  count = var.enable_alertmanager ? 1 : 0
+# resource "aws_prometheus_alert_manager_definition" "this" {
+#   count = var.enable_alertmanager ? 1 : 0
 
-  workspace_id = local.amp_ws_id
+#   workspace_id = local.amp_ws_id
 
-  definition = <<EOF
-alertmanager_config: |
-    route:
-      receiver: 'default'
-    receivers:
-      - name: 'default'
-EOF
-}
+#   definition = <<EOF
+# alertmanager_config: |
+#     route:
+#       receiver: 'default'
+#     receivers:
+#       - name: 'default'
+# EOF
+# }
 # TODO: Tweak permissions to be least privileged.
 provider "grafana" {
   url  = local.amg_ws_endpoint
   auth = module.managed_grafana.workspace_api_keys["admin"].key
 }
 
-resource "grafana_data_source" "amp" {
-  count      = var.create_prometheus_data_source ? 1 : 0
-  type       = "prometheus"
-  name       = local.name
-  is_default = true
-  url        = local.amp_ws_endpoint
-  json_data {
-    http_method     = "GET"
-    sigv4_auth      = true
-    sigv4_auth_type = local.iam_role_name
-    sigv4_region    = local.amp_ws_region
-  }
-  tags = var.tags
-}
+# resource "grafana_data_source" "amp" {
+#   count      = var.create_prometheus_data_source ? 1 : 0
+#   type       = "prometheus"
+#   name       = local.name
+#   is_default = true
+#   #url        = local.amp_ws_endpoint
+#   json_data {
+#     http_method     = "GET"
+#     sigv4_auth      = true
+#     sigv4_auth_type = local.iam_role_name
+#     sigv4_region    = var.aws_region
+#   }
+# }
 
-#dashboards
-resource "grafana_folder" "this" {
-  count = var.create_dashboard_folder ? 1 : 0
-  title = "Observability Accelerator Dashboards"
-}
-
-module "managed_prometheus" {
-  source = "./modules/prometheus"
-  #version = "0.0.1"
-
-  aws_region                       = local.amp_ws_region
-  dashboards_folder_id             = grafana_folder.this[0].id
-  managed_prometheus_workspace_ids = aws_prometheus_workspace.this[0].id
-  active_series_threshold         = 100000
-  ingestion_rate_threshold        = 70000
-  tags = var.tags
-}
+# module "managed_prometheus" {
+#   source = "git@github.com:terraform-aws-modules/terraform-aws-managed-service-prometheus.git"
+#   #version = "0.0.1"
+#   aws_region                       = local.amp_ws_region
+#   dashboards_folder_id             = grafana_folder.this[0].id
+#   managed_prometheus_workspace_ids = aws_prometheus_workspace.this[0].id
+#   active_series_threshold         = 100000
+#   ingestion_rate_threshold        = 70000
+#   tags = var.tags
+# }
 
 # fetch user (could also be a group https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/identitystore_group)
 # the instance has to be fetched first and it doesn't require any arguments
