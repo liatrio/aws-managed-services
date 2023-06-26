@@ -52,6 +52,7 @@ resource "grafana_data_source" "amp" {
     sigv4_auth_type = local.iam_role_name
     sigv4_region    = local.amp_ws_region
   }
+  tags = var.tags
 }
 
 #dashboards
@@ -67,8 +68,9 @@ module "managed_prometheus" {
   aws_region                       = local.amp_ws_region
   dashboards_folder_id             = grafana_folder.this[0].id
   managed_prometheus_workspace_ids = aws_prometheus_workspace.this[0].id
-  active_series_threshold          = 100000
-  ingestion_rate_threshold         = 70000
+  active_series_threshold         = 100000
+  ingestion_rate_threshold        = 70000
+  tags = var.tags
 }
 
 # fetch user (could also be a group https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/identitystore_group)
