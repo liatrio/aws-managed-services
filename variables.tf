@@ -34,11 +34,6 @@ variable "managed_prometheus_workspace_region" {
   default     = null
 }
 
-variable "grafana_data_source_name" {
-  description = "Region where Amazon Managed Service for Prometheus is deployed"
-  type        = string
-}
-
 variable "enable_alertmanager" {
   description = "Creates Amazon Managed Service for Prometheus AlertManager for all workloads"
   type        = bool
@@ -174,3 +169,15 @@ variable "account_access_type" {
   type        = string
   default     = "CURRENT_ACCOUNT"
 }
+
+ variable "vpc_private_subnets" {
+  description = "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect."
+  type = list 
+  default = []
+ }
+
+ variable "vpc_security_group_ids" {
+  description = "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect."
+  type = list 
+  default = []
+ }

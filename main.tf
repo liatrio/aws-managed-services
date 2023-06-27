@@ -146,6 +146,17 @@ module "managed_grafana" {
   saml_role_assertion     = var.create_saml_configuration ? var.saml_role_assertion : ""
   saml_idp_metadata_url   = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
 
+  # vpc configuration
+  vpc_configuration = {
+    subnet_ids = var.vpc_private_subnets #module.vpc.private_subnets
+    security_group_ids = var.vpc_security_group_ids
+  }
+
+  # network_access_control = {
+  #   prefix_list_ids = []
+  #   vpce_ids = []
+  # }
+
   # Role associations
   # Ref: https://github.com/aws/aws-sdk/issues/25
   # Ref: https://github.com/hashicorp/terraform-provider-aws/issues/18812
@@ -158,6 +169,5 @@ module "managed_grafana" {
   #   #   "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
   #   # }
   # }
-
 
 }
