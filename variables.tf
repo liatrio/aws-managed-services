@@ -174,10 +174,22 @@ variable "account_access_type" {
   description = "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect."
   type = list 
   default = []
- }
+}
 
  variable "vpc_security_group_ids" {
   description = "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect."
   type = list 
   default = []
- }
+}
+
+variable "vpc_endpoint_ids" {
+  description = "An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored."
+  type = list 
+  default = []
+}
+
+variable "nac_prefix_list_ids" {
+  description = "An array of prefix list IDs."
+  type = list
+  default = []
+}

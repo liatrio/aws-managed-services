@@ -79,7 +79,8 @@ module "managed_prometheus" {
 # }
 
 module "managed_grafana" {
-  source = "terraform-aws-modules/managed-service-grafana/aws"
+  #source = "terraform-aws-modules/managed-service-grafana/aws"
+  source = "/Users/paulhenson/liatrio/repos/terraform-aws-managed-service-grafana"
   #version = "1.8.0"
 
   name              = local.name
@@ -148,14 +149,12 @@ module "managed_grafana" {
 
   # vpc configuration
   vpc_configuration = {
-    subnet_ids = var.vpc_private_subnets #module.vpc.private_subnets
+    subnet_ids         = var.vpc_private_subnets
     security_group_ids = var.vpc_security_group_ids
   }
 
-  # network_access_control = {
-  #   prefix_list_ids = []
-  #   vpce_ids = []
-  # }
+  nac_prefix_list_ids = var.nac_prefix_list_ids
+  vpc_endpoint_ids    = var.vpc_endpoint_ids
 
   # Role associations
   # Ref: https://github.com/aws/aws-sdk/issues/25
