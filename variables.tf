@@ -193,3 +193,9 @@ variable "nac_prefix_list_ids" {
   type = list
   default = []
 }
+
+variable "data_sources" {
+  description = "The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY."
+  type = list(string)
+  default = [""]
+}

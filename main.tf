@@ -74,7 +74,7 @@ module "managed_grafana" {
   account_access_type       = var.account_access_type
   authentication_providers  = var.authentication_providers
   permission_type           = "SERVICE_MANAGED"
-  data_sources              = ["CLOUDWATCH", "PROMETHEUS", "XRAY"]
+  data_sources              = var.data_sources
   notification_destinations = ["SNS"]
   stack_set_name            = local.name
   create                    = var.create
