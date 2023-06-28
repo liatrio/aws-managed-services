@@ -78,8 +78,7 @@ module "managed_prometheus" {
 # }
 
 module "managed_grafana" {
-  #source = "terraform-aws-modules/managed-service-grafana/aws"
-  source = "/Users/paulhenson/liatrio/repos/terraform-aws-managed-service-grafana"
+  source = "terraform-aws-modules/managed-service-grafana/aws"
   #version = "1.8.0"
 
   name              = local.name
