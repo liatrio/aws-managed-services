@@ -39,8 +39,8 @@ provider "grafana" {
 }
 
 module "managed_prometheus" {
-  source = "terraform-aws-modules/terraform-aws-managed-service-prometheus"
-  
+  source  = "terraform-aws-modules/managed-service-prometheus/aws"
+  version = "2.2.2"
   create                = var.create
   create_workspace      = var.create_workspace
 
