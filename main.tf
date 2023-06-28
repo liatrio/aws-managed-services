@@ -39,7 +39,7 @@ provider "grafana" {
 }
 
 module "managed_prometheus" {
-  source = "git@github.com:terraform-aws-modules/terraform-aws-managed-service-prometheus.git"
+  source = "terraform-aws-modules/terraform-aws-managed-service-prometheus"
   
   create                = var.create
   create_workspace      = var.create_workspace
@@ -65,6 +65,7 @@ module "managed_prometheus" {
 
 module "managed_grafana" {
   source = "terraform-aws-modules/managed-service-grafana/aws"
+  #source = "/Users/paulhenson/liatrio/repos/terraform-aws-managed-service-grafana"
   #version = "1.8.0"
 
   name              = local.name
