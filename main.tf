@@ -38,20 +38,6 @@ provider "grafana" {
   auth = module.managed_grafana.workspace_api_keys["admin"].key
 }
 
-# resource "grafana_data_source" "amp" {
-#   count      = var.create_prometheus_data_source ? 1 : 0
-#   type       = "prometheus"
-#   name       = var.grafana_data_source_name
-#   is_default = true
-#   url        = local.amp_ws_endpoint
-#   json_data {
-#     http_method     = "GET"
-#     sigv4_auth      = true
-#     sigv4_auth_type = var.iam_role_name
-#     sigv4_region    = var.aws_region
-#   }
-# }
-
 module "managed_prometheus" {
   source = "git@github.com:terraform-aws-modules/terraform-aws-managed-service-prometheus.git"
   
