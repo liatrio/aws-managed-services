@@ -15,7 +15,6 @@ locals {
 
 # resource "aws_prometheus_workspace" "this" {
 #   count = var.enable_managed_prometheus ? 1 : 0
-
 #   alias = var.managed_prometheus_workspace_alias
 #   tags  = var.tags
 # }
