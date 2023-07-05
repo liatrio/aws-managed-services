@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
 
       # Checks that all Terraform configuration files adhere to a canonical format
       - name: Terraform Format
@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
 
       - name: Run tfsec with reviewdog
         uses: reviewdog/action-tfsec@v1.14.0
@@ -80,7 +80,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
 
       - name: Run tflint with reviewdog
         uses: reviewdog/action-tflint@v1.15.0
