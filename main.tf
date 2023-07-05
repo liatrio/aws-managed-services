@@ -2,7 +2,7 @@
 
 locals {
   #name        = local.locals_vars.locals.name
-  description = "Amazon Managed Grafana workspace for ${local.name}"
+  description = "Amazon Managed Grafana workspace for ${var.name}"
 
 
   tags = {
@@ -13,86 +13,19 @@ locals {
   iam_role_name         = "aws-observability-workspace-iam-role"
 }
 
-
-# resource "aws_prometheus_workspace" "this" {
-#   count = var.enable_managed_prometheus ? 1 : 0
-
-#   alias = local.name
-#   tags  = var.tags
-# }
-
-# resource "aws_prometheus_alert_manager_definition" "this" {
-#   count = var.enable_alertmanager ? 1 : 0
-
-#   workspace_id = local.amp_ws_id
-
-#   definition = <<EOF
-# alertmanager_config: |
-#     route:
-#       receiver: 'default'
-#     receivers:
-#       - name: 'default'
-# EOF
-# }
-# TODO: Tweak permissions to be least privileged.
-provider "grafana" {
-  url  = local.amg_ws_endpoint
-  auth = module.managed_grafana.workspace_api_keys["admin"].key
-}
-
-# resource "grafana_data_source" "amp" {
-#   count      = var.create_prometheus_data_source ? 1 : 0
-#   type       = "prometheus"
-#   name       = local.name
-#   is_default = true
-#   #url        = local.amp_ws_endpoint
-#   json_data {
-#     http_method     = "GET"
-#     sigv4_auth      = true
-#     sigv4_auth_type = local.iam_role_name
-#     sigv4_region    = var.aws_region
-#   }
-# }
-
-# module "managed_prometheus" {
-#   source = "git@github.com:terraform-aws-modules/terraform-aws-managed-service-prometheus.git"
-#   #version = "0.0.1"
-#   aws_region                       = local.amp_ws_region
-#   dashboards_folder_id             = grafana_folder.this[0].id
-#   managed_prometheus_workspace_ids = aws_prometheus_workspace.this[0].id
-#   active_series_threshold         = 100000
-#   ingestion_rate_threshold        = 70000
-#   tags = var.tags
-# }
-
-# fetch user (could also be a group https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/identitystore_group)
-# the instance has to be fetched first and it doesn't require any arguments
-# data "aws_ssoadmin_instances" "instances" {}
-# data "aws_identitystore_user" "user" {
-#   identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
-
-#   alternate_identifier {
-#     unique_attribute {
-#       attribute_path  = "UserName"
-#       attribute_value = "o11yTestUser" #TODO: Change this to be a variable
-#     }
-#   }
-# }
-
 module "managed_grafana" {
   source = "terraform-aws-modules/managed-service-grafana/aws"
   #version = "1.8.0"
 
-  name              = local.name
-  associate_license = false
-  description       = local.description
-  //account_access_type       = "CURRENT_ACCOUNT"
+  name                      = var.name
+  associate_license         = false
+  description               = local.description
   account_access_type       = var.account_access_type
   authentication_providers  = var.authentication_providers
   permission_type           = "SERVICE_MANAGED"
-  data_sources              = ["CLOUDWATCH", "PROMETHEUS", "XRAY"]
+  data_sources              = var.data_sources
   notification_destinations = ["SNS"]
-  stack_set_name            = local.name
+  stack_set_name            = var.name
   create                    = var.create
   create_workspace          = var.create_workspace
 
@@ -145,19 +78,5 @@ module "managed_grafana" {
   saml_org_assertion      = var.create_saml_configuration ? var.saml_org_assertion : ""
   saml_role_assertion     = var.create_saml_configuration ? var.saml_role_assertion : ""
   saml_idp_metadata_url   = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
-
-  # Role associations
-  # Ref: https://github.com/aws/aws-sdk/issues/25
-  # Ref: https://github.com/hashicorp/terraform-provider-aws/issues/18812
-  # WARNING: https://github.com/hashicorp/terraform-provider-aws/issues/24166
-  # role_associations = {
-  #   "ADMIN" = {
-  #     "user_ids" = [data.aws_identitystore_user.user.user_id]
-  #   }
-  #   # "EDITOR" = {
-  #   #   "user_ids" = ["2222222222-abcdefgh-1234-5678-abcd-999999999999"]
-  #   # }
-  # }
-
 
 }
