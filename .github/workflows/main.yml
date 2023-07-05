@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: liatrio/github-action-conventional-release@v0.2.0
+      - uses: liatrio/github-action-conventional-release@v1.0.0
         id: tag
         with:
           debug: false
