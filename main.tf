@@ -27,7 +27,7 @@ locals {
 }
 
 module "managed_grafana" {
-  source = "git@github.com/liatrio/terraform-aws-managed-service-grafana.git"
+  source = "github.com/liatrio/terraform-aws-managed-service-grafana.git"
   #version = "1.8.0"
 
   name                      = var.name
