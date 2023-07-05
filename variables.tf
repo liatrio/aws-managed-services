@@ -34,12 +34,6 @@ variable "managed_grafana_workspace_id" {
   default     = ""
 }
 
-variable "grafana_api_key" {
-  description = "Grafana API key for the Amazon Managed Grafana workspace"
-  type        = string
-  default     = ""
-}
-
 variable "create_prometheus_data_source" {
   description = "Boolean flag to enable Amazon Managed Grafana datasource"
   type        = bool
