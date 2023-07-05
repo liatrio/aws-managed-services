@@ -1,20 +1,35 @@
 //TODO: Move the grafana module in the `modules/grafana` folder
 
+data "aws_region" "current" {
+  name = var.aws_region
+}
+
+data "aws_grafana_workspace" "this" {
+  workspace_id = module.managed_grafana.workspace_id
+}
+
+
 locals {
   #name        = local.locals_vars.locals.name
   description = "Amazon Managed Grafana workspace for ${var.name}"
-
 
   tags = {
     GithubRepo = "terraform-aws-observability-accelerator"
     GithubOrg  = "aws-observability"
   }
+
   grafana_iam_role_name = module.managed_grafana.workspace_iam_role_name
   iam_role_name         = "aws-observability-workspace-iam-role"
+  amg_ws_endpoint       = "https://${data.aws_grafana_workspace.this.endpoint}"
+  amg_ws_id             = module.managed_grafana.workspace_id
+
+  grafana_workspace_id = data.aws_grafana_workspace.this.workspace_id
 }
 
 module "managed_grafana" {
-  source = "terraform-aws-modules/managed-service-grafana/aws"
+  # This is a fork of the upstream community edition and will be set back to the published
+  # module version once the fix for adding `nac_configuration` is merged upstream.
+  source = "github.com/liatrio/terraform-aws-managed-service-grafana.git"
   #version = "1.8.0"
 
   name                      = var.name
@@ -79,4 +94,14 @@ module "managed_grafana" {
   saml_role_assertion     = var.create_saml_configuration ? var.saml_role_assertion : ""
   saml_idp_metadata_url   = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
 
+  # vpc configuration
+  vpc_configuration = {
+    subnet_ids         = var.vpc_private_subnets
+    security_group_ids = var.vpc_security_group_ids
+  }
+
+  nac_configuration = {
+    nac_prefix_list_ids = var.nac_prefix_list_ids
+    vpc_endpoint_ids    = var.vpc_endpoint_ids
+  }
 }
