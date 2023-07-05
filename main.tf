@@ -27,6 +27,8 @@ locals {
 }
 
 module "managed_grafana" {
+  # This is a fork of the upstream community edition and will be set back to the published
+  # module version once the fix for adding `nac_configuration` is merged upstream.
   source = "github.com/liatrio/terraform-aws-managed-service-grafana.git"
   #version = "1.8.0"
 
