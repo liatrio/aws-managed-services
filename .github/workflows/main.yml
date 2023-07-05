@@ -16,9 +16,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: liatrio/github-action-conventional-release@v0.2.0
-        id: tag
+      - uses: go-semantic-release/action@v1
         with:
-          debug: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          changelog-generator-opt: "emojis=true"
