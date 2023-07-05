@@ -16,5 +16,4 @@ locals {
   amg_ws_id       = module.managed_grafana.workspace_id
 
   grafana_workspace_id = data.aws_grafana_workspace.this.workspace_id
-  name = "aws-observability-accelerator-2"
 }

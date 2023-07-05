@@ -157,3 +157,15 @@ variable "account_access_type" {
   type        = string
   default     = "CURRENT_ACCOUNT"
 }
+
+variable "data_sources" {
+  description = "List of data sources to create in the workspace"
+  type        = list(string)
+  default     = ["CLOUDWATCH", "PROMETHEUS", "XRAY"]
+}
+
+variable "name" {
+  description = "The name of the deployment"
+  type        = string
+  default     = "aws-o11y-managed-services"
+}
