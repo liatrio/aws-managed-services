@@ -79,4 +79,14 @@ module "managed_grafana" {
   saml_role_assertion     = var.create_saml_configuration ? var.saml_role_assertion : ""
   saml_idp_metadata_url   = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
 
+  # vpc configuration
+  vpc_configuration = {
+    subnet_ids         = var.vpc_private_subnets
+    security_group_ids = var.vpc_security_group_ids
+  }
+
+  nac_configuration = {
+    nac_prefix_list_ids = var.nac_prefix_list_ids
+    vpc_endpoint_ids    = var.vpc_endpoint_ids
+  }
 }
