@@ -185,3 +185,18 @@ variable "name" {
   type        = string
   default     = "aws-o11y-managed-services"
 }
+
+
+### AMP RELATED VARIABLES
+
+variable "amp_create_workspace" {
+  description = "Specifies if the AMP workspace has to be created or not"
+  type        = bool
+  default     = true
+}
+
+variable "amp_create_workspace" {
+  description = "If 'amp_create_workspace' is set to 'false' then a workspace has to be supplied."
+  type        = string
+  default     = ""
+}
