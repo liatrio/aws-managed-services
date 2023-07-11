@@ -195,7 +195,7 @@ variable "amp_create_workspace" {
   default     = true
 }
 
-variable "amp_create_workspace" {
+variable "amp_workspace_id" {
   description = "If 'amp_create_workspace' is set to 'false' then a workspace has to be supplied."
   type        = string
   default     = ""
