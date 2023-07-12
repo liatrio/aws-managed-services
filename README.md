@@ -15,7 +15,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 
     **Example**: 
     
-    10.156.107.123 g-9ea62153ee.grafana-workspace.us-east-1.amazonaws.com
+    <ip address> <workspace-id>.grafana-workspace.<region>.amazonaws.com
     ![](img/hosts_file.png)
 
     The IP address is the subnet associated with the VPCE. You can find it by navigating to the VPC dashboard, selecting **Endpoints** and opening your VPC endpoint.
