@@ -3,7 +3,7 @@ Contains AWS managed services.
 
 ## AMG Private VPC Connectivity
 
-To set up AMG to work with a VPC you must provide the _vpc_private_subnets_ and _vpc_security_group_ids_ inputs. This will set up the outbound VPC connections.
+To set up AMG to work with a VPC you must provide the `vpc_private_subnets` and `vpc_security_group_ids` inputs. This will set up the outbound VPC connections.
 
 If you want to restrict traffic to AMG we need to set up Network Access Controls. You **can** provide a prefix list via the _nac_prefix_list_ids_ input and you **must** provide the vpc endpoint via the _vpc_endpoint_ids_ input. 
 
