@@ -40,7 +40,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.7.0 |
 | <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 0.24.0 |
 | <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 1.25.0 |
 
@@ -48,7 +48,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.1.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.7.0 |
 
 ## Modules
 
