@@ -72,10 +72,11 @@ variable "create_iam_role" {
 
 variable "vpc_configuration" {
   description = "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to"
-  type = object({
-    subnet_ids         = optional(list(string))
-    security_group_ids = optional(list(string))
-  })
+  //type = object({
+  //  subnet_ids         = optional(list(string))
+  //  security_group_ids = optional(list(string))
+  //})
+  type    = any
   default = {}
   //type        = any
   //default     = {}
@@ -83,10 +84,11 @@ variable "vpc_configuration" {
 
 variable "nac_configuration" {
   description = "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to"
-  type = object({
-    prefix_list_ids = optional(list(string))
-    vpce_ids        = optional(list(string))
-  })
+  //type = object({
+  //  prefix_list_ids = optional(list(string))
+  //  vpce_ids        = optional(list(string))
+  //})
+  type    = any
   default = {}
   //type        = any
 }
