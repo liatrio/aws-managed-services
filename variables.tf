@@ -93,6 +93,11 @@ variable "nac_configuration" {
   //type        = any
 }
 
+variable "nac_configuration" {
+  description = "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to"
+  type        = any
+}
+
 variable "iam_role_arn" {
   description = "Existing IAM role ARN for the workspace. Required if `create_iam_role` is set to `false`"
   type        = string
