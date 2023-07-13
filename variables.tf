@@ -72,8 +72,23 @@ variable "create_iam_role" {
 
 variable "vpc_configuration" {
   description = "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to"
-  type        = any
-  default     = {}
+  type = object({
+    subnet_ids : list(string)
+    security_group_ids : list(string)
+  })
+  default = {}
+  //type        = any
+  //default     = {}
+}
+
+variable "nac_configuration" {
+  description = "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to"
+  type = object({
+    prefix_list_ids : list(string)
+    vpce_ids : list(string)
+  })
+  default = {}
+  //type        = any
 }
 
 variable "iam_role_arn" {
@@ -150,30 +165,6 @@ variable "account_access_type" {
   description = "The account access type."
   type        = string
   default     = "CURRENT_ACCOUNT"
-}
-
-variable "vpc_private_subnets" {
-  description = "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect."
-  type        = list(any)
-  default     = []
-}
-
-variable "vpc_security_group_ids" {
-  description = "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect."
-  type        = list(any)
-  default     = []
-}
-
-variable "vpc_endpoint_ids" {
-  description = "An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored."
-  type        = list(any)
-  default     = []
-}
-
-variable "nac_prefix_list_ids" {
-  description = "An array of prefix list IDs."
-  type        = list(any)
-  default     = []
 }
 
 variable "data_sources" {
