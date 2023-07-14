@@ -188,7 +188,6 @@ variable "name" {
 
 
 ### AMP RELATED VARIABLES
-
 variable "amp_create_workspace" {
   description = "Specifies if the AMP workspace has to be created or not"
   type        = bool
@@ -199,4 +198,10 @@ variable "amp_workspace_id" {
   description = "If 'amp_create_workspace' is set to 'false' then a workspace has to be supplied."
   type        = string
   default     = ""
+}
+
+variable "amp_alias" {
+  description = "The alias of the AMP workspace"
+  type        = string
+  default     = "observability-amp-workspace"
 }
