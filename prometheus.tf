@@ -27,6 +27,10 @@ resource "aws_iam_role" "amp_iam_role" {
 EOF
 }
 
+# This policy follows Amazon's documentation for permissions required to get Prometheus working
+# https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-onboard-ingest-metrics-new-Prometheus.html
+# https://docs.aws.amazon.com/prometheus/latest/userguide/set-up-irsa.html#set-up-irsa-ingest
+#tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "amp_role_policy" {
   name = "amp_role_policy"
   role = aws_iam_role.amp_iam_role.id
