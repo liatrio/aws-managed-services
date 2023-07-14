@@ -66,7 +66,7 @@ module "managed_grafana" {
   saml_name_assertion     = var.create_saml_configuration ? var.saml_name_assertion : ""
   saml_org_assertion      = var.create_saml_configuration ? var.saml_org_assertion : ""
   saml_role_assertion     = var.create_saml_configuration ? var.saml_role_assertion : ""
-  saml_idp_metadata_url   = var.create_saml_configuration ? var.saml_idp_metadata_url : ""
+  saml_idp_metadata_url   = var.create_saml_configuration && var.generate_metadata_url ? local.idp_metadata_url : var.saml_idp_metadata_url
 
   # vpc & nac configuration
   vpc_configuration = var.vpc_configuration
