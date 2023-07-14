@@ -16,13 +16,15 @@ resource "aws_iam_role" "amp_iam_role" {
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": [
-          "aps:RemoteWrite", 
-          "aps:GetSeries", 
-          "aps:GetLabels",
-          "aps:GetMetricMetadata"
-      ], 
-      "Resource": "*"
+      "Principal": {
+        "Federated": "arn:aws:iam::AWS_ACCOUNT_ID:oidc-provider/OIDC_PROVIDER"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "OIDC_PROVIDER:sub": "system:serviceaccount:SERVICE_ACCOUNT_NAMESPACE:SERVICE_ACCOUNT_AMP_INGEST_NAME"
+        }
+      }
     }
   ]
 }
@@ -31,6 +33,24 @@ EOF
   tags = {
     description = "IAM Role used by prometheus on EKS to interact with AMP"
   }
+}
+
+resource "aws_iam_role_policy" "amp_role_policy" {
+  name = "amp_role_policy"
+  role = aws_iam_role.amp_iam_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "aps:RemoteWrite",
+        "aps:GetSeries", 
+        "aps:GetLabels",
+        "aps:GetMetricMetadata"
+      ]
+      Resource = "*"
+    }]
+  })
 }
 
 ## TODO: Moved this where it makes sense, currently in this file/folder for ease of iterating
