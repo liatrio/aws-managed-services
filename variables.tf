@@ -49,7 +49,10 @@ variable "create_dashboard_folder" {
 variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)
-  default     = {}
+  default = {
+    GithubRepo = "terraform-aws-observability-accelerator"
+    GithubOrg  = "aws-observability"
+  }
 }
 
 variable "create" {
@@ -80,17 +83,6 @@ variable "vpc_configuration" {
   default = {}
   //type        = any
   //default     = {}
-}
-
-variable "nac_configuration" {
-  description = "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to"
-  //type = object({
-  //  prefix_list_ids = optional(list(string))
-  //  vpce_ids        = optional(list(string))
-  //})
-  type    = any
-  default = {}
-  //type        = any
 }
 
 variable "nac_configuration" {
@@ -184,4 +176,23 @@ variable "name" {
   description = "The name of the deployment"
   type        = string
   default     = "aws-o11y-managed-services"
+}
+
+### AMP RELATED VARIABLES
+variable "amp_create_workspace" {
+  description = "Specifies if the AMP workspace has to be created or not"
+  type        = bool
+  default     = true
+}
+
+variable "amp_workspace_id" {
+  description = "If 'amp_create_workspace' is set to 'false' then a workspace has to be supplied."
+  type        = string
+  default     = ""
+}
+
+variable "amp_ws_alias" {
+  description = "The alias of the AMP workspace"
+  type        = string
+  default     = "observability-amp-workspace"
 }
