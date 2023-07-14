@@ -42,7 +42,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.7.0 |
 | <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 0.24.0 |
-| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 1.25.0 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 2.1.0 |
 
 ## Providers
 
@@ -86,15 +86,17 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_data_sources"></a> [data\_sources](#input\_data\_sources) | List of data sources to create in the workspace | `list(string)` | <pre>[<br>  "CLOUDWATCH",<br>  "PROMETHEUS",<br>  "XRAY"<br>]</pre> | no |
 | <a name="input_enable_alertmanager"></a> [enable\_alertmanager](#input\_enable\_alertmanager) | Creates Amazon Managed Service for Prometheus AlertManager for all workloads | `bool` | `false` | no |
 | <a name="input_enable_managed_prometheus"></a> [enable\_managed\_prometheus](#input\_enable\_managed\_prometheus) | Creates a new Amazon Managed Service for Prometheus Workspace | `bool` | `true` | no |
+| <a name="input_generate_metadata_url"></a> [generate\_metadata\_url](#input\_generate\_metadata\_url) | Boolean on whether or not to generate the metadata url | `bool` | `false` | no |
 | <a name="input_iam_role_arn"></a> [iam\_role\_arn](#input\_iam\_role\_arn) | Existing IAM role ARN for the workspace. Required if `create_iam_role` is set to `false` | `string` | `null` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | The name of the IAM Role to create or associate with | `string` | `"aws-observability-workspace-iam-role"` | no |
+| <a name="input_idp_url_with_postfix"></a> [idp\_url\_with\_postfix](#input\_idp\_url\_with\_postfix) | The FQDN of the IDP metadata URL with a postfix as needed to generate the metadata IDP url. Works for Ping | `string` | `""` | no |
 | <a name="input_managed_grafana_workspace_id"></a> [managed\_grafana\_workspace\_id](#input\_managed\_grafana\_workspace\_id) | Amazon Managed Grafana Workspace ID | `string` | `""` | no |
 | <a name="input_managed_prometheus_workspace_id"></a> [managed\_prometheus\_workspace\_id](#input\_managed\_prometheus\_workspace\_id) | Amazon Managed Service for Prometheus Workspace ID | `string` | `""` | no |
 | <a name="input_managed_prometheus_workspace_region"></a> [managed\_prometheus\_workspace\_region](#input\_managed\_prometheus\_workspace\_region) | Region where Amazon Managed Service for Prometheus is deployed | `string` | `null` | no |
-| <a name="input_nac_configuration"></a> [nac\_configuration](#input\_nac\_configuration) | The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to | `any` | n/a | yes |
+| <a name="input_nac_configuration"></a> [nac\_configuration](#input\_nac\_configuration) | The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to | `any` | `{}` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the deployment | `string` | `"aws-o11y-managed-services"` | no |
-| <a name="input_saml_admin_role_values"></a> [saml\_admin\_role\_values](#input\_saml\_admin\_role\_values) | Name of the admin role value. | `list(any)` | `""` | no |
-| <a name="input_saml_editor_role_values"></a> [saml\_editor\_role\_values](#input\_saml\_editor\_role\_values) | Name of the editor role value. | `list(any)` | `""` | no |
+| <a name="input_saml_admin_role_values"></a> [saml\_admin\_role\_values](#input\_saml\_admin\_role\_values) | Name of the admin role value. | `list(any)` | `[]` | no |
+| <a name="input_saml_editor_role_values"></a> [saml\_editor\_role\_values](#input\_saml\_editor\_role\_values) | Name of the editor role value. | `list(any)` | `[]` | no |
 | <a name="input_saml_email_assertion"></a> [saml\_email\_assertion](#input\_saml\_email\_assertion) | Name of the saml email used for assertion. | `string` | `""` | no |
 | <a name="input_saml_groups_assertion"></a> [saml\_groups\_assertion](#input\_saml\_groups\_assertion) | Name of the saml groups used for assertion. | `string` | `""` | no |
 | <a name="input_saml_idp_metadata_url"></a> [saml\_idp\_metadata\_url](#input\_saml\_idp\_metadata\_url) | IDP Meta data url. | `string` | `""` | no |
