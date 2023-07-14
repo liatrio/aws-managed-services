@@ -200,3 +200,9 @@ variable "amp_ws_alias" {
   type        = string
   default     = "observability-amp-workspace"
 }
+
+variable "idp_url_with_postfix" {
+  description = "The FQDN of the IDP metadata URL with a postfix as needed to generate the metadata IDP url. Works for Ping"
+  type        = string
+  default     = ""
+}
