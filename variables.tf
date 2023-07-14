@@ -110,13 +110,13 @@ variable "authentication_providers" {
 variable "saml_admin_role_values" {
   description = "Name of the admin role value."
   type        = list(any)
-  default     = ""
+  default     = []
 }
 
 variable "saml_editor_role_values" {
   description = "Name of the editor role value."
   type        = list(any)
-  default     = ""
+  default     = []
 }
 
 variable "saml_email_assertion" {
