@@ -44,7 +44,7 @@ resource "aws_iam_role_policy" "amp_role_policy" {
       Effect = "Allow"
       Action = [
         "aps:RemoteWrite",
-        "aps:GetSeries", 
+        "aps:GetSeries",
         "aps:GetLabels",
         "aps:GetMetricMetadata"
       ]
@@ -55,9 +55,9 @@ resource "aws_iam_role_policy" "amp_role_policy" {
 
 ## TODO: Moved this where it makes sense, currently in this file/folder for ease of iterating
 module "managed_prometheus" {
-  count = var.enable_managed_prometheus == true ? 1 : 0
-  source                           = "github.com/liatrio/terraform-aws-managed-service-prometheus.git" #this should be using the official, but for dev purposes using liatrio fork
+  count  = var.enable_managed_prometheus == true ? 1 : 0
+  source = "github.com/liatrio/terraform-aws-managed-service-prometheus.git" #this should be using the official, but for dev purposes using liatrio fork
 
   create_workspace = var.amp_create_workspace == true ? var.amp_create_workspace : false
-  workspace_id = var.amp_workspace_id
+  workspace_id     = var.amp_workspace_id
 }
