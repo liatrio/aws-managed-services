@@ -49,7 +49,7 @@ variable "create_dashboard_folder" {
 variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)
-  default     = {
+  default = {
     GithubRepo = "terraform-aws-observability-accelerator"
     GithubOrg  = "aws-observability"
   }
