@@ -206,3 +206,9 @@ variable "idp_url_with_postfix" {
   type        = string
   default     = ""
 }
+
+variable "generate_metadata_url" {
+  description = "Boolean on whether or not to generate the metadata url"
+  type        = bool
+  default     = false
+}
