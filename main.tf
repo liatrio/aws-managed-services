@@ -51,9 +51,9 @@ module "managed_grafana" {
   iam_role_path                  = "/grafana/"
   iam_role_force_detach_policies = true
   iam_role_max_session_duration  = 7200
-  iam_role_tags                  = local.tags
+  iam_role_tags                  = var.tags
 
-  tags = local.tags
+  tags = var.tags
 
   # SAML configuration settings
   create_saml_configuration = var.create_saml_configuration
