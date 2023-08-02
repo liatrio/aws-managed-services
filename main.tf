@@ -74,12 +74,12 @@ module "managed_grafana" {
 }
 
 resource "aws_secretsmanager_secret" "grafana_api_token" {
-  name = "AMG_API_Token"
+  name       = "AMG_API_Token"
   kms_key_id = aws_kms_key.secrets.arn
 }
 
 resource "aws_kms_key" "secrets" {
-    enable_key_rotation = true
+  enable_key_rotation = true
 }
 
 resource "aws_secretsmanager_secret_version" "sversion" {
