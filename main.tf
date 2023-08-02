@@ -74,10 +74,10 @@ module "managed_grafana" {
 }
 
 resource "aws_secretsmanager_secret" "grafana_api_token" {
-   name = "AMG_API_Token"
+  name = "AMG_API_Token"
 }
- 
+
 resource "aws_secretsmanager_secret_version" "sversion" {
-  secret_id = aws_secretsmanager_secret.grafana_api_token.id
+  secret_id     = aws_secretsmanager_secret.grafana_api_token.id
   secret_string = module.managed_grafana.workspace_api_keys["admin"].key
 }
