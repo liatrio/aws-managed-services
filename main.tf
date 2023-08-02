@@ -72,3 +72,17 @@ module "managed_grafana" {
   vpc_configuration = var.vpc_configuration
   nac_configuration = var.nac_configuration
 }
+
+resource "aws_secretsmanager_secret" "grafana_api_token" {
+  name       = "AMG_API_Token"
+  kms_key_id = aws_kms_key.secrets.arn
+}
+
+resource "aws_kms_key" "secrets" {
+  enable_key_rotation = true
+}
+
+resource "aws_secretsmanager_secret_version" "sversion" {
+  secret_id     = aws_secretsmanager_secret.grafana_api_token.id
+  secret_string = module.managed_grafana.workspace_api_keys["admin"].key
+}
