@@ -212,3 +212,9 @@ variable "generate_metadata_url" {
   type        = bool
   default     = false
 }
+
+variable "asm_api_token_secret_name" {
+  description = "ASM secret name for the API token to be stored in"
+  type        = string
+  default     = "amg-api-token"
+}
