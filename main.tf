@@ -74,7 +74,7 @@ module "managed_grafana" {
 }
 
 resource "aws_secretsmanager_secret" "grafana_api_token" {
-  name       = "AMG_API_Token"
+  name       = var.asm_api_token_secret_name
   kms_key_id = aws_kms_key.secrets.arn
 }
 
