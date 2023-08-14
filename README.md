@@ -42,14 +42,14 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.7.0 |
 | <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 0.24.0 |
-| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 1.25.0 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 2.2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.7.0 |
-| <a name="provider_grafana"></a> [grafana](#provider\_grafana) | 1.25.0 |
+| <a name="provider_grafana"></a> [grafana](#provider\_grafana) | 2.2.0 |
 
 ## Modules
 
@@ -70,8 +70,8 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | [aws_secretsmanager_secret.grafana_sa_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
 | [aws_secretsmanager_secret_version.sa_version](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
 | [aws_secretsmanager_secret_version.sversion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
-| [grafana_service_account.admin](https://registry.terraform.io/providers/grafana/grafana/1.25.0/docs/resources/service_account) | resource |
-| [grafana_service_account_token.admin_service_account_token](https://registry.terraform.io/providers/grafana/grafana/1.25.0/docs/resources/service_account_token) | resource |
+| [grafana_service_account.admin](https://registry.terraform.io/providers/grafana/grafana/2.2.0/docs/resources/service_account) | resource |
+| [grafana_service_account_token.admin_service_account_token](https://registry.terraform.io/providers/grafana/grafana/2.2.0/docs/resources/service_account_token) | resource |
 | [aws_grafana_workspace.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/grafana_workspace) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
