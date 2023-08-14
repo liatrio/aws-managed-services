@@ -218,3 +218,9 @@ variable "asm_api_token_secret_name" {
   type        = string
   default     = "amg-api-token"
 }
+
+variable "asm_sa_token_secret_name" {
+  description = "ASM secret name for the service account token to be stored in"
+  type        = string
+  default     = "amg-sa-token"
+}
