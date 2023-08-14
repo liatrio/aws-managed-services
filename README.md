@@ -49,6 +49,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.7.0 |
+| <a name="provider_grafana"></a> [grafana](#provider\_grafana) | 1.25.0 |
 
 ## Modules
 
@@ -66,7 +67,10 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | [aws_kms_key.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_prometheus_workspace.amp_ws](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/prometheus_workspace) | resource |
 | [aws_secretsmanager_secret.grafana_api_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret.grafana_sa_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
 | [aws_secretsmanager_secret_version.sversion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
+| [grafana_service_account.admin](https://registry.terraform.io/providers/grafana/grafana/1.25.0/docs/resources/service_account) | resource |
+| [grafana_service_account_token.admin_service_account_token](https://registry.terraform.io/providers/grafana/grafana/1.25.0/docs/resources/service_account_token) | resource |
 | [aws_grafana_workspace.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/grafana_workspace) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
@@ -79,6 +83,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_amp_workspace_id"></a> [amp\_workspace\_id](#input\_amp\_workspace\_id) | If 'amp\_create\_workspace' is set to 'false' then a workspace has to be supplied. | `string` | `""` | no |
 | <a name="input_amp_ws_alias"></a> [amp\_ws\_alias](#input\_amp\_ws\_alias) | The alias of the AMP workspace | `string` | `"observability-amp-workspace"` | no |
 | <a name="input_asm_api_token_secret_name"></a> [asm\_api\_token\_secret\_name](#input\_asm\_api\_token\_secret\_name) | ASM secret name for the API token to be stored in | `string` | `"amg-api-token"` | no |
+| <a name="input_asm_sa_token_secret_name"></a> [asm\_sa\_token\_secret\_name](#input\_asm\_sa\_token\_secret\_name) | ASM secret name for the service account token to be stored in | `string` | `"amg-sa-token"` | no |
 | <a name="input_authentication_providers"></a> [authentication\_providers](#input\_authentication\_providers) | List containing the methods used to authenticate. | `list(any)` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | `"us-east-1"` | no |
 | <a name="input_create"></a> [create](#input\_create) | Determines whether a resources will be created | `bool` | `true` | no |
