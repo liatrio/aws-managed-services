@@ -100,6 +100,7 @@ resource "aws_secretsmanager_secret_version" "sversion" {
     grafana_service_account_token.admin_service_account_token
   ]
 }
+
 resource "grafana_service_account" "admin" {
   name        = "grafana_service_account_admin"
   role        = "Admin"
