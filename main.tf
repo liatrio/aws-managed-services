@@ -92,7 +92,7 @@ resource "aws_secretsmanager_secret_version" "sversion" {
   secret_string = module.managed_grafana.workspace_api_keys["admin"].key
 }
 
-resource "aws_secretsmanager_secret_version" "sversion" {
+resource "aws_secretsmanager_secret_version" "sa_version" {
   secret_id     = aws_secretsmanager_secret.grafana_sa_token.id
   secret_string = grafana_service_account_token.admin_service_account_token.key
 
