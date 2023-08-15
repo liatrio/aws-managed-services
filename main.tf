@@ -72,11 +72,6 @@ module "managed_grafana" {
   vpc_configuration = var.vpc_configuration
   nac_configuration = var.nac_configuration
 }
-provider "grafana" {
-  url  = local.amg_ws_endpoint
-  auth = module.managed_grafana.workspace_api_keys["admin"].key
-}
-
 resource "aws_secretsmanager_secret" "grafana_api_token" {
   name       = var.asm_api_token_secret_name
   kms_key_id = aws_kms_key.secrets.arn
@@ -114,4 +109,9 @@ resource "grafana_service_account" "admin" {
 resource "grafana_service_account_token" "admin_service_account_token" {
   name               = "service_account_admin_key"
   service_account_id = grafana_service_account.admin.id
+}
+
+provider "grafana" {
+  url  = local.amg_ws_endpoint
+  auth = module.managed_grafana.workspace_api_keys["admin"].key
 }
