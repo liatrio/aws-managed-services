@@ -73,7 +73,7 @@ module "managed_grafana" {
   nac_configuration = var.nac_configuration
 }
 provider "grafana" {
-  url  = local.grafana_url
+  url  = local.amg_ws_endpoint
   auth = module.managed_grafana.workspace_api_keys["admin"].key
 }
 
