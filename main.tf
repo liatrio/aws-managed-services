@@ -72,6 +72,10 @@ module "managed_grafana" {
   vpc_configuration = var.vpc_configuration
   nac_configuration = var.nac_configuration
 }
+provider "grafana" {
+  url  = local.grafana_url
+  auth = module.managed_grafana.workspace_api_keys["admin"].key
+}
 
 resource "aws_secretsmanager_secret" "grafana_api_token" {
   name       = var.asm_api_token_secret_name
