@@ -1,5 +1,4 @@
 //TODO: Move the grafana module in the `modules/grafana` folder
-
 module "managed_grafana" {
   # This is a fork of the upstream community edition and will be set back to the published
   # module version once the fix for adding `nac_configuration` is merged upstream.
@@ -72,9 +71,13 @@ module "managed_grafana" {
   vpc_configuration = var.vpc_configuration
   nac_configuration = var.nac_configuration
 }
-
 resource "aws_secretsmanager_secret" "grafana_api_token" {
   name       = var.asm_api_token_secret_name
+  kms_key_id = aws_kms_key.secrets.arn
+}
+
+resource "aws_secretsmanager_secret" "grafana_sa_token" {
+  name       = var.asm_sa_token_secret_name
   kms_key_id = aws_kms_key.secrets.arn
 }
 
@@ -85,4 +88,29 @@ resource "aws_kms_key" "secrets" {
 resource "aws_secretsmanager_secret_version" "sversion" {
   secret_id     = aws_secretsmanager_secret.grafana_api_token.id
   secret_string = module.managed_grafana.workspace_api_keys["admin"].key
+}
+
+resource "aws_secretsmanager_secret_version" "sa_version" {
+  secret_id     = aws_secretsmanager_secret.grafana_sa_token.id
+  secret_string = grafana_service_account_token.admin_service_account_token.key
+
+  depends_on = [
+    grafana_service_account_token.admin_service_account_token
+  ]
+}
+
+resource "grafana_service_account" "admin" {
+  name        = "grafana_service_account_admin"
+  role        = "Admin"
+  is_disabled = false
+}
+
+resource "grafana_service_account_token" "admin_service_account_token" {
+  name               = "service_account_admin_key"
+  service_account_id = grafana_service_account.admin.id
+}
+
+provider "grafana" {
+  url  = local.amg_ws_endpoint
+  auth = module.managed_grafana.workspace_api_keys["admin"].key
 }
