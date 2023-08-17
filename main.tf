@@ -108,7 +108,7 @@ resource "grafana_service_account" "admin" {
 resource "grafana_service_account_token" "admin_service_account_token" {
   name               = "service_account_admin_key"
   service_account_id = grafana_service_account.admin.id
-  seconds_to_live = 2592000
+  seconds_to_live    = 2592000
 }
 
 provider "grafana" {
