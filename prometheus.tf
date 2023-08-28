@@ -20,18 +20,7 @@ EOF
 resource "aws_prometheus_rule_group_namespace" "demo" {
   name         = "rules"
   workspace_id = aws_prometheus_workspace.demo.id
-  data         = <<EOF
-groups:
-- name: example
-  rules:
-  - alert: HighRequestLatency
-    expr: sum(system_memory_usage{job=\"xlqwas62\"})
-    for: 2m
-    labels:
-      severity: page
-    annotations:
-      summary: High request latency
-EOF
+  data         = file("./rules.yml")
 }
 
 resource "aws_iam_role" "amp_iam_role" {

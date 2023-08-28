@@ -1,0 +1,10 @@
+groups:
+- name: example
+  rules:
+  - alert: HighRequestLatency
+    expr: sum(system_memory_usage{job=\"xlqwas62\"})
+    for: 2m
+    labels:
+      severity: page
+    annotations:
+      summary: High request latency
