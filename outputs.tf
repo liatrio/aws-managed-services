@@ -8,10 +8,10 @@ output "aws_region" {
 #   value       = local.amp_ws_endpoint
 # }
 
-# output "managed_prometheus_workspace_id" {
-#   description = "Amazon Managed Prometheus workspace ID"
-#   value       = local.amp_ws_id
-# }
+output "managed_prometheus_workspace_id" {
+  description = "Amazon Managed Prometheus workspace ID"
+  value       = aws_prometheus_workspace.amp_ws[0].id
+}
 
 # output "managed_prometheus_workspace_region" {
 #   description = "Amazon Managed Prometheus workspace region"
