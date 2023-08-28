@@ -3,6 +3,32 @@ resource "aws_prometheus_workspace" "amp_ws" {
   alias = var.amp_ws_alias
 }
 
+resource "aws_prometheus_alert_manager_definition" "this" {
+  count = var.enable_alertmanager ? 1 : 0
+
+  workspace_id = local.amp_ws_id
+
+  definition = <<EOF
+alertmanager_config: |
+    route:
+      receiver: 'default'
+    receivers:
+      - name: 'default'
+EOF
+}
+
+resource "aws_prometheus_rule_group_namespace" "demo" {
+  name         = "rules"
+  workspace_id = aws_prometheus_workspace.demo.id
+  data         = <<EOF
+groups:
+  - name: test
+    rules:
+    - record: metric:recording_rule
+      expr: avg(rate(container_cpu_usage_seconds_total[5m]))
+EOF
+}
+
 resource "aws_iam_role" "amp_iam_role" {
   name = "amp_iam_role"
 
