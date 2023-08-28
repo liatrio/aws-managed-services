@@ -22,10 +22,15 @@ resource "aws_prometheus_rule_group_namespace" "demo" {
   workspace_id = aws_prometheus_workspace.demo.id
   data         = <<EOF
 groups:
-  - name: test
-    rules:
-    - record: metric:recording_rule
-      expr: avg(rate(container_cpu_usage_seconds_total[5m]))
+- name: example
+  rules:
+  - alert: HighRequestLatency
+    expr: sum(system_memory_usage{job=\"xlqwas62\"})
+    for: 2m
+    labels:
+      severity: page
+    annotations:
+      summary: High request latency
 EOF
 }
 
