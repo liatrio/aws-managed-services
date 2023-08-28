@@ -17,12 +17,6 @@ alertmanager_config: |
 EOF
 }
 
-resource "aws_prometheus_rule_group_namespace" "demo" {
-  name         = "rules"
-  workspace_id = aws_prometheus_workspace.amp_ws[0].id
-  data         = file("./rules.yml")
-}
-
 resource "aws_iam_role" "amp_iam_role" {
   name = "amp_iam_role"
 
