@@ -6,7 +6,7 @@ resource "aws_prometheus_workspace" "amp_ws" {
 resource "aws_prometheus_alert_manager_definition" "this" {
   count = var.enable_alertmanager ? 1 : 0
 
-  workspace_id = aws_prometheus_workspace.amp_ws.id
+  workspace_id = aws_prometheus_workspace.amp_ws[0].id
 
   definition = <<EOF
 alertmanager_config: |
@@ -19,7 +19,7 @@ EOF
 
 resource "aws_prometheus_rule_group_namespace" "demo" {
   name         = "rules"
-  workspace_id = aws_prometheus_workspace.amp_ws.id
+  workspace_id = aws_prometheus_workspace.amp_ws[0].id
   data         = file("./rules.yml")
 }
 
