@@ -8,13 +8,7 @@ resource "aws_prometheus_alert_manager_definition" "this" {
 
   workspace_id = aws_prometheus_workspace.amp_ws[0].id
 
-  definition = <<EOF
-alertmanager_config: |
-    route:
-      receiver: 'default'
-    receivers:
-      - name: 'default'
-EOF
+  definition = var.alert_manager_config
 }
 
 resource "aws_iam_role" "amp_iam_role" {
