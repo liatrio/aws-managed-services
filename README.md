@@ -81,6 +81,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_access_type"></a> [account\_access\_type](#input\_account\_access\_type) | The account access type. | `string` | `"CURRENT_ACCOUNT"` | no |
+| <a name="input_alert_manager_config"></a> [alert\_manager\_config](#input\_alert\_manager\_config) | The contents of the alarm rules file. | `string` | `"  alertmanager_config: |\n      route:\n        receiver: 'default'\n      receivers:\n        - name: 'default'\n"` | no |
 | <a name="input_amp_create_workspace"></a> [amp\_create\_workspace](#input\_amp\_create\_workspace) | Specifies if the AMP workspace has to be created or not | `bool` | `true` | no |
 | <a name="input_amp_workspace_id"></a> [amp\_workspace\_id](#input\_amp\_workspace\_id) | If 'amp\_create\_workspace' is set to 'false' then a workspace has to be supplied. | `string` | `""` | no |
 | <a name="input_amp_ws_alias"></a> [amp\_ws\_alias](#input\_amp\_ws\_alias) | The alias of the AMP workspace | `string` | `"observability-amp-workspace"` | no |
