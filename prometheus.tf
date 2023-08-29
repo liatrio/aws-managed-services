@@ -3,6 +3,20 @@ resource "aws_prometheus_workspace" "amp_ws" {
   alias = var.amp_ws_alias
 }
 
+resource "aws_prometheus_alert_manager_definition" "this" {
+  count = var.enable_alertmanager ? 1 : 0
+
+  workspace_id = aws_prometheus_workspace.amp_ws[0].id
+
+  definition = <<EOF
+alertmanager_config: |
+    route:
+      receiver: 'default'
+    receivers:
+      - name: 'default'
+EOF
+}
+
 resource "aws_iam_role" "amp_iam_role" {
   name = "amp_iam_role"
 
