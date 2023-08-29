@@ -222,3 +222,15 @@ variable "asm_sa_token_secret_name" {
   description = "ASM secret name for the service account token to be stored in"
   type        = string
 }
+
+variable "alert_manager_config" {
+  description = "The contents of the alarm rules file."
+  type        = string
+  default     = <<EOF
+  alertmanager_config: |
+      route:
+        receiver: 'default'
+      receivers:
+        - name: 'default'
+  EOF
+}
