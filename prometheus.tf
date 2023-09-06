@@ -1,6 +1,15 @@
+# TODO: We are currently flowing data through this workspace here, we will eventually want to move everything to the workspace being created by the public module.
 resource "aws_prometheus_workspace" "amp_ws" {
   count = var.enable_managed_prometheus == true ? 1 : 0
   alias = var.amp_ws_alias
+
+  dynamic "logging_configuration" {
+    for_each = length(var.logging_configuration) > 0 ? [var.logging_configuration] : []
+
+    content {
+      log_group_arn = logging_configuration.value.log_group_arn
+    }
+  }
 }
 
 resource "aws_prometheus_alert_manager_definition" "this" {
