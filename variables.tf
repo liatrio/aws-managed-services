@@ -234,3 +234,8 @@ variable "alert_manager_config" {
         - name: 'default'
   EOF
 }
+variable "logging_configuration" {
+  description = "Map that contains the logging configuration for prometheus."
+  type        = map(string)
+  default     = {}
+}
