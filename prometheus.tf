@@ -72,7 +72,6 @@ module "managed_prometheus" {
 
   create_workspace = var.amp_create_workspace == true ? var.amp_create_workspace : false
   workspace_id     = var.amp_workspace_id
-  create = true
 
   logging_configuration = var.logging_configuration
 }
