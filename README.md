@@ -102,6 +102,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_iam_role_arn"></a> [iam\_role\_arn](#input\_iam\_role\_arn) | Existing IAM role ARN for the workspace. Required if `create_iam_role` is set to `false` | `string` | `null` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | The name of the IAM Role to create or associate with | `string` | `"aws-observability-workspace-iam-role"` | no |
 | <a name="input_idp_url_with_postfix"></a> [idp\_url\_with\_postfix](#input\_idp\_url\_with\_postfix) | The FQDN of the IDP metadata URL with a postfix as needed to generate the metadata IDP url. Works for Ping | `string` | `""` | no |
+| <a name="input_logging_configuration"></a> [logging\_configuration](#input\_logging\_configuration) | Map that contains the logging configuration for prometheus. | `map(string)` | `{}` | no |
 | <a name="input_managed_grafana_workspace_id"></a> [managed\_grafana\_workspace\_id](#input\_managed\_grafana\_workspace\_id) | Amazon Managed Grafana Workspace ID | `string` | `""` | no |
 | <a name="input_managed_prometheus_workspace_id"></a> [managed\_prometheus\_workspace\_id](#input\_managed\_prometheus\_workspace\_id) | Amazon Managed Service for Prometheus Workspace ID | `string` | `""` | no |
 | <a name="input_managed_prometheus_workspace_region"></a> [managed\_prometheus\_workspace\_region](#input\_managed\_prometheus\_workspace\_region) | Region where Amazon Managed Service for Prometheus is deployed | `string` | `null` | no |
