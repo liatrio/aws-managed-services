@@ -70,8 +70,6 @@ module "managed_grafana" {
   # vpc & nac configuration
   vpc_configuration = var.vpc_configuration
   nac_configuration = var.nac_configuration
-
-  logging_configuration = var.logging_configuration
 }
 resource "aws_secretsmanager_secret" "grafana_api_token" {
   name       = var.asm_api_token_secret_name
