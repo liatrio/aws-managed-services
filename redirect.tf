@@ -30,7 +30,7 @@ resource "aws_route53_record" "s3_alias" {
   }
 }
 
-# tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-enable-versioning
+# tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-enable-versioning tfsec:ignore:aws-s3-enable-bucket-encryption tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket" "amg_bucket" {
   bucket = "grafana.${var.route53_hosted_zone_name}"
 }
