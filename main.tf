@@ -137,37 +137,26 @@ resource "aws_route53_zone" "private" {
 }
 
 resource "aws_kms_key" "amg_bucket_key" {
-  description             = "This key is used to encrypt bucket objects"
-  deletion_window_in_days = 10
+  enable_key_rotation = true
 }
 
 resource "aws_s3_bucket" "amg_bucket" {
   bucket = "grafana.${var.route53_hosted_zone_name}"
-}
-
-resource "aws_s3_bucket_server_side_encryption_configuration" "amg_bucket" {
-  bucket = aws_s3_bucket.amg_bucket.id
-
-  rule {
-    apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.amg_bucket_key.arn
-      sse_algorithm     = "aws:kms"
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = aws_kms_key.amg_bucket_key.arn
+        sse_algorithm     = "aws:kms"
+      }
     }
   }
 }
 
-resource "aws_s3_bucket_ownership_controls" "amg_bucket" {
-  bucket = aws_s3_bucket.amg_bucket.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-resource "aws_s3_bucket_acl" "amg_bucket" {
-  depends_on = [aws_s3_bucket_ownership_controls.amg_bucket]
-
-  bucket = aws_s3_bucket.amg_bucket.id
-  acl    = "private"
+resource "aws_s3_bucket_public_access_block" "amg_bucket" {
+  bucket                  = aws_s3_bucket.amg_bucket.id
+  block_public_acls       = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_website_configuration" "amg_bucket_website" {
