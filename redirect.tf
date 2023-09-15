@@ -30,21 +30,9 @@ resource "aws_route53_record" "s3_alias" {
   }
 }
 
-resource "aws_kms_key" "amg_bucket_key" {
-  enable_key_rotation = true
-}
-
 # tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-enable-versioning
 resource "aws_s3_bucket" "amg_bucket" {
   bucket = "grafana.${var.route53_hosted_zone_name}"
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        kms_master_key_id = aws_kms_key.amg_bucket_key.arn
-        sse_algorithm     = "aws:kms"
-      }
-    }
-  }
 }
 
 resource "aws_s3_bucket_public_access_block" "amg_bucket" {
