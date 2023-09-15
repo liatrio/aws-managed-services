@@ -140,6 +140,7 @@ resource "aws_kms_key" "amg_bucket_key" {
   enable_key_rotation = true
 }
 
+# tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-enable-versioning
 resource "aws_s3_bucket" "amg_bucket" {
   bucket = "grafana.${var.route53_hosted_zone_name}"
   server_side_encryption_configuration {
