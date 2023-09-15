@@ -124,6 +124,13 @@ resource "aws_route53_zone" "private" {
     content {
       vpc_id = vpc.value
     }
+    lifecycle {
+      ignore_changes = [
+        # Ignore changes to vpcs, e.g. because a management agent
+        # updates these based on some ruleset managed elsewhere.
+        vpc,
+      ]
+    }
   }
   lifecycle {
     ignore_changes = [
