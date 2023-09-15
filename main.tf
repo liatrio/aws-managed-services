@@ -140,6 +140,20 @@ resource "aws_s3_bucket" "amg_bucket" {
   bucket = "grafana.${var.route53_hosted_zone_name}"
 }
 
+resource "aws_s3_bucket_ownership_controls" "amg_bucket" {
+  bucket = aws_s3_bucket.amg_bucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "amg_bucket" {
+  depends_on = [aws_s3_bucket_ownership_controls.amg_bucket]
+
+  bucket = aws_s3_bucket.amg_bucket.id
+  acl    = "private"
+}
+
 resource "aws_s3_bucket_website_configuration" "amg_bucket_website" {
   bucket = aws_s3_bucket.amg_bucket.bucket
 
