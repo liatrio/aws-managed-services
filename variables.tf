@@ -239,3 +239,47 @@ variable "logging_configuration" {
   type        = map(string)
   default     = {}
 }
+
+variable "environment" {
+  description = "Environment name"
+  type        = string # "dev"
+}
+
+variable "route53_hosted_zone_name" {
+  description = "value of the private hosted zone name"
+  type        = string
+  default     = "" # "csauto.observability.dev.aws.swacorp.com"
+}
+
+variable "aws_route53_zone_tags" {
+  description = "value of the private hosted zone tags"
+  type        = map(string)
+  default     = {} # { "Name" = "observability.dev.aws.acme.com" }
+}
+
+variable "vpc_ids" {
+  description = "List of VPC IDs"
+  type        = list(string)
+  default     = [] # ["vpc-0a1b2c3d4e5f6g7h", "vpc-7g6f5e4d3c2b1a0i"]
+}
+
+variable "amg_redirect_hostname" {
+  description = "The hostname to which the S3 bucket will redirect requests"
+  type        = string
+  default     = "" # "g-c89c75e665.grafana-workspace.us-east-1.amazonaws.com"
+}
+
+variable "s3_website_endpoint_zone_ids" {
+  description = "S3 website endpoint zone IDs by region"
+  type        = map(string)
+  default = {
+    "us-east-1" = "Z3AQBSTGFYJSTF"
+    "us-west-1" = "Z2F56UZL2M1ACD"
+    "us-west-2" = "Z3BJ6K6RIION7M"
+    # Add other regions as needed
+  }
+}
+
+locals {
+  s3_website_endpoint_zone_id = var.s3_website_endpoint_zone_ids[var.aws_region]
+}
