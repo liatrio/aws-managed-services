@@ -24,11 +24,12 @@ resource "aws_route53_record" "s3_alias" {
   zone_id = aws_route53_zone.private.zone_id
 
   alias {
-    name                   = aws_s3_bucket_website_configuration.amg_bucket_website.website_domain
-    zone_id                = local.s3_website_endpoint_zone_id
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
     evaluate_target_health = false
   }
 }
+
 
 # tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-enable-versioning tfsec:ignore:aws-s3-enable-bucket-encryption tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket" "amg_bucket" {
@@ -48,5 +49,56 @@ resource "aws_s3_bucket_website_configuration" "amg_bucket_website" {
 
   redirect_all_requests_to {
     host_name = var.amg_redirect_hostname
+    protocol  = "https"
+  }
+}
+
+resource "aws_cloudfront_distribution" "s3_distribution" {
+  origin {
+    domain_name = aws_s3_bucket_website_configuration.amg_bucket_website.website_endpoint
+    origin_id   = "S3Origin"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "match-viewer" # Fetch from S3 with the same protocol as viewer used.
+      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
+    }
+  }
+
+  enabled         = true
+  is_ipv6_enabled = true
+  price_class     = "PriceClass_100"
+
+  default_cache_behavior {
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "S3Origin"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "allow-all" # Serve content with the same protocol as viewer used.
+    min_ttl                = 0
+    default_ttl            = 3600
+    max_ttl                = 86400
+  }
+
+  viewer_certificate {
+    acm_certificate_arn = ""
+    # cloudfront_default_certificate = false
+    minimum_protocol_version = "TLSv1.2_2021"
+    ssl_support_method       = "sni-only"
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
   }
 }
