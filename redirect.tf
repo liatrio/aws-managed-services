@@ -24,7 +24,7 @@ resource "aws_route53_record" "s3_alias" {
   zone_id = aws_route53_zone.private.zone_id
 
   alias {
-    name                   = aws_s3_bucket_website_configuration.amg_bucket_website.website_endpoint
+    name                   = aws_s3_bucket_website_configuration.amg_bucket_website.website_domain
     zone_id                = local.s3_website_endpoint_zone_id
     evaluate_target_health = false
   }
