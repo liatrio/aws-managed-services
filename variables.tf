@@ -280,6 +280,12 @@ variable "s3_website_endpoint_zone_ids" {
   }
 }
 
+variable "create_amp_iam_role" {
+  type        = bool
+  default     = true
+  description = "Whether to create the AMP IAM role or not. 1 per account is needed."
+}
+
 locals {
   s3_website_endpoint_zone_id = var.s3_website_endpoint_zone_ids[var.aws_region]
 }
