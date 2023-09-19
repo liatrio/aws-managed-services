@@ -66,27 +66,18 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
+
   enabled         = true
-  is_ipv6_enabled = true
+  is_ipv6_enabled = false
   price_class     = "PriceClass_100"
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
+    # Using the Managed-CachingOptimized (recommended for S3) managed policy ID:
+    cache_policy_id  = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3Origin"
-
-    forwarded_values {
-      query_string = false
-
-      cookies {
-        forward = "none"
-      }
-    }
-
-    viewer_protocol_policy = "allow-all" # Serve content with the same protocol as viewer used.
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    viewer_protocol_policy = "redirect-to-https"
   }
 
   viewer_certificate {
