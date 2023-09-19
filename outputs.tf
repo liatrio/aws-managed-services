@@ -60,5 +60,5 @@ output "create_workspace" {
 
 output "amg_route53_alias" {
   description = "value for the route53 alias, which contains the bucket name, hosted zone id and amg fqdn"
-  value       = aws_route53_record.s3_alias.name
+  value       = var.create_redirect ? aws_route53_record.s3_alias[0].name : ""
 }
