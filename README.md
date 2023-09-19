@@ -97,6 +97,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | `"us-east-1"` | no |
 | <a name="input_aws_route53_zone_tags"></a> [aws\_route53\_zone\_tags](#input\_aws\_route53\_zone\_tags) | value of the private hosted zone tags | `map(string)` | `{}` | no |
 | <a name="input_create"></a> [create](#input\_create) | Determines whether a resources will be created | `bool` | `true` | no |
+| <a name="input_create_amp_iam_role"></a> [create\_amp\_iam\_role](#input\_create\_amp\_iam\_role) | Whether to create the AMP IAM role or not. 1 per account is needed. | `bool` | `true` | no |
 | <a name="input_create_dashboard_folder"></a> [create\_dashboard\_folder](#input\_create\_dashboard\_folder) | Boolean flag to enable Amazon Managed Grafana folder and dashboards | `bool` | `true` | no |
 | <a name="input_create_iam_role"></a> [create\_iam\_role](#input\_create\_iam\_role) | Determines whether a an IAM role is created or to use an existing IAM role | `bool` | `true` | no |
 | <a name="input_create_prometheus_data_source"></a> [create\_prometheus\_data\_source](#input\_create\_prometheus\_data\_source) | Boolean flag to enable Amazon Managed Grafana datasource | `bool` | `true` | no |
