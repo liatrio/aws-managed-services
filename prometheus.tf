@@ -52,7 +52,7 @@ EOF
 resource "aws_iam_role_policy" "amp_role_policy" {
   count = var.create_amp_iam_role ? 1 : 0
   name  = "amp_role_policy"
-  role  = aws_iam_role.amp_iam_role.id
+  role  = aws_iam_role.amp_iam_role[0].id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
