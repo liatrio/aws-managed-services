@@ -21,7 +21,8 @@ resource "aws_prometheus_alert_manager_definition" "this" {
 }
 
 resource "aws_iam_role" "amp_iam_role" {
-  name = "amp_iam_role"
+  count = var.create_amp_iam_role ? 1 : 0
+  name  = "amp_iam_role"
 
   assume_role_policy = <<EOF
 {
@@ -49,8 +50,9 @@ EOF
 # https://docs.aws.amazon.com/prometheus/latest/userguide/set-up-irsa.html#set-up-irsa-ingest
 #tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "amp_role_policy" {
-  name = "amp_role_policy"
-  role = aws_iam_role.amp_iam_role.id
+  count = var.create_amp_iam_role ? 1 : 0
+  name  = "amp_role_policy"
+  role  = aws_iam_role.amp_iam_role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
