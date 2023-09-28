@@ -2,7 +2,7 @@ locals {
   #name        = local.locals_vars.locals.name
   description = "Amazon Managed Grafana workspace for ${var.name}"
 
-  grafana_iam_role_name = module.managed_grafana.workspace_iam_role_name
+  grafana_iam_role_name = module.managed_grafana[0].workspace_iam_role_name
   iam_role_name         = "aws-observability-workspace-iam-role"
 
   amp_ws_endpoint  = module.managed_prometheus.workspace_prometheus_endpoint
