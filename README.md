@@ -139,6 +139,8 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | Name | Description |
 |------|-------------|
 | <a name="output_amg_route53_alias"></a> [amg\_route53\_alias](#output\_amg\_route53\_alias) | value for the route53 alias, which contains the bucket name, hosted zone id and amg fqdn |
+| <a name="output_asm_amg_api_token_name"></a> [asm\_amg\_api\_token\_name](#output\_asm\_amg\_api\_token\_name) | The name of the ASM vault that is storing the AMG API Token. |
+| <a name="output_asm_amg_sa_token_name"></a> [asm\_amg\_sa\_token\_name](#output\_asm\_amg\_sa\_token\_name) | The name of the ASM vault that is storing the AMG SA Token. |
 | <a name="output_aws_region"></a> [aws\_region](#output\_aws\_region) | AWS Region |
 | <a name="output_create"></a> [create](#output\_create) | The creatae flag that gets passed to the module. |
 | <a name="output_create_workspace"></a> [create\_workspace](#output\_create\_workspace) | The create\_workspace flag that gets passed to the module. |
