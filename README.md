@@ -49,7 +49,6 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.7.0 |
-| <a name="provider_grafana"></a> [grafana](#provider\_grafana) | >= 2.1.0 |
 
 ## Modules
 
@@ -64,7 +63,6 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 |------|------|
 | [aws_iam_role.amp_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.amp_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
-| [aws_kms_key.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_prometheus_alert_manager_definition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/prometheus_alert_manager_definition) | resource |
 | [aws_prometheus_workspace.amp_ws](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/prometheus_workspace) | resource |
 | [aws_route53_record.s3_alias](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
@@ -72,12 +70,6 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | [aws_s3_bucket.amg_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_public_access_block.amg_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_website_configuration.amg_bucket_website](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration) | resource |
-| [aws_secretsmanager_secret.grafana_api_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
-| [aws_secretsmanager_secret.grafana_sa_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
-| [aws_secretsmanager_secret_version.sa_version](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
-| [aws_secretsmanager_secret_version.sversion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
-| [grafana_service_account.admin](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/service_account) | resource |
-| [grafana_service_account_token.admin_service_account_token](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/service_account_token) | resource |
 | [aws_grafana_workspace.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/grafana_workspace) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
@@ -139,8 +131,6 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | Name | Description |
 |------|-------------|
 | <a name="output_amg_route53_alias"></a> [amg\_route53\_alias](#output\_amg\_route53\_alias) | value for the route53 alias, which contains the bucket name, hosted zone id and amg fqdn |
-| <a name="output_asm_amg_api_token_name"></a> [asm\_amg\_api\_token\_name](#output\_asm\_amg\_api\_token\_name) | The name of the ASM vault that is storing the AMG API Token. |
-| <a name="output_asm_amg_sa_token_name"></a> [asm\_amg\_sa\_token\_name](#output\_asm\_amg\_sa\_token\_name) | The name of the ASM vault that is storing the AMG SA Token. |
 | <a name="output_aws_region"></a> [aws\_region](#output\_aws\_region) | AWS Region |
 | <a name="output_create"></a> [create](#output\_create) | The creatae flag that gets passed to the module. |
 | <a name="output_create_workspace"></a> [create\_workspace](#output\_create\_workspace) | The create\_workspace flag that gets passed to the module. |
