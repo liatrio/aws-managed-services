@@ -62,3 +62,12 @@ output "amg_route53_alias" {
   description = "value for the route53 alias, which contains the bucket name, hosted zone id and amg fqdn"
   value       = var.create_redirect ? aws_route53_record.s3_alias[0].name : ""
 }
+
+output "asm_amg_api_token_name" {
+  description = "The name of the ASM vault that is storing the AMG API Token."
+  value = aws_secretsmanager_secret.grafana_api_token.name
+}
+output "asm_amg_sa_token_name" {
+  description = "The name of the ASM vault that is storing the AMG SA Token."
+  value = aws_secretsmanager_secret.grafana_sa_token.name
+}
