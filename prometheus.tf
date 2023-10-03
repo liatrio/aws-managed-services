@@ -3,23 +3,9 @@ resource "aws_cloudwatch_log_group" "amp_log_group" {
   name_prefix = "/o11y/amp/"
 }
 
-# TODO: We are currently flowing data through this workspace here, we will eventually want to move everything to the workspace being created by the public module.
 resource "aws_prometheus_workspace" "amp_ws" {
   count = var.enable_managed_prometheus == true ? 1 : 0
   alias = var.amp_ws_alias
-
-  # NOTE:
-  # Currently commented this out in favour of a default log group (defined above).
-  # Avoids having to manually define log groups prior to executingthe terraform module.
-  #
-  # ---
-  # dynamic "logging_configuration" {
-  #   for_each = length(var.logging_configuration) > 0 ? [var.logging_configuration] : []
-
-  #   content {
-  #     log_group_arn = logging_configuration.value.log_group_arn
-  #   }
-  # }
 
   logging_configuration {
     log_group_arn = aws_cloudwatch_log_group.amp_log_group.arn
@@ -82,12 +68,13 @@ resource "aws_iam_role_policy" "amp_role_policy" {
   })
 }
 
-module "managed_prometheus" {
-  count  = var.enable_managed_prometheus == true ? 1 : 0
-  source = "terraform-aws-modules/managed-service-prometheus/aws"
+# TODO: We are currently flowing data through the workspace above, we will eventually want to move everything to the workspace being created by this public module.
+# module "managed_prometheus" {
+#   count  = var.enable_managed_prometheus == true ? 1 : 0
+#   source = "terraform-aws-modules/managed-service-prometheus/aws"
 
-  create_workspace = var.amp_create_workspace == true ? var.amp_create_workspace : false
-  workspace_id     = var.amp_workspace_id
+#   create_workspace = var.amp_create_workspace == true ? var.amp_create_workspace : false
+#   workspace_id     = var.amp_workspace_id
 
-  logging_configuration = var.logging_configuration
-}
+#   logging_configuration = var.logging_configuration
+# }
