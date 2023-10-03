@@ -8,7 +8,7 @@ resource "aws_prometheus_workspace" "amp_ws" {
   alias = var.amp_ws_alias
 
   logging_configuration {
-    log_group_arn = aws_cloudwatch_log_group.amp_log_group.arn
+    log_group_arn = "${aws_cloudwatch_log_group.amp_log_group.arn}:*"
   }
 }
 
