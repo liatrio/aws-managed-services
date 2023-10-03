@@ -54,7 +54,6 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_managed_grafana"></a> [managed\_grafana](#module\_managed\_grafana) | github.com/liatrio/terraform-aws-managed-service-grafana.git | n/a |
-| <a name="module_managed_prometheus"></a> [managed\_prometheus](#module\_managed\_prometheus) | terraform-aws-modules/managed-service-prometheus/aws | n/a |
 
 ## Resources
 
