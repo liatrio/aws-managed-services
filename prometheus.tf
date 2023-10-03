@@ -1,4 +1,4 @@
-resource "aws_cloudwatch_log_group" "o11y" {
+resource "aws_cloudwatch_log_group" "amp_log_group" {
   name = "o11y-amp-default"
 }
 
@@ -21,7 +21,7 @@ resource "aws_prometheus_workspace" "amp_ws" {
   # }
 
   logging_configuration {
-    log_group_arn = aws_cloudwatch_log_group.o11y.arn
+    log_group_arn = aws_cloudwatch_log_group.amp_log_group.arn
   }
 }
 
