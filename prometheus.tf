@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_log_group" "amp_log_group" {
-  name = "o11y-amp-default"
+  name_prefix = "/o11y/amp/"
 }
 
 # TODO: We are currently flowing data through this workspace here, we will eventually want to move everything to the workspace being created by the public module.
