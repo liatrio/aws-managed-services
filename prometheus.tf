@@ -8,7 +8,7 @@ resource "aws_prometheus_workspace" "amp_ws" {
   alias = var.amp_ws_alias
 
   logging_configuration {
-    log_group_arn = aws_cloudwatch_log_group.amp_log_group.arn
+    log_group_arn = "${aws_cloudwatch_log_group.amp_log_group.arn}:*"
   }
 }
 
@@ -69,12 +69,14 @@ resource "aws_iam_role_policy" "amp_role_policy" {
 }
 
 # TODO: We are currently flowing data through the workspace above, we will eventually want to move everything to the workspace being created by this public module.
-# module "managed_prometheus" {
-#   count  = var.enable_managed_prometheus == true ? 1 : 0
-#   source = "terraform-aws-modules/managed-service-prometheus/aws"
+module "managed_prometheus" {
+  count  = var.enable_managed_prometheus == true ? 1 : 0
+  source = "terraform-aws-modules/managed-service-prometheus/aws"
 
-#   create_workspace = var.amp_create_workspace == true ? var.amp_create_workspace : false
-#   workspace_id     = var.amp_workspace_id
+  create_workspace = var.amp_create_workspace == true ? var.amp_create_workspace : false
+  workspace_id     = var.amp_workspace_id
 
-#   logging_configuration = var.logging_configuration
-# }
+  logging_configuration = {
+    log_group_arn = "${aws_cloudwatch_log_group.amp_log_group.arn}:*"
+  }
+}
