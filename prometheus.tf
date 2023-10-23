@@ -3,23 +3,6 @@ resource "aws_cloudwatch_log_group" "amp_log_group" {
   name_prefix = "/o11y/amp/"
 }
 
-resource "aws_prometheus_workspace" "amp_ws" {
-  count = var.enable_managed_prometheus == true ? 1 : 0
-  alias = var.amp_ws_alias
-
-  logging_configuration {
-    log_group_arn = "${aws_cloudwatch_log_group.amp_log_group.arn}:*"
-  }
-}
-
-resource "aws_prometheus_alert_manager_definition" "this" {
-  count = var.enable_alertmanager ? 1 : 0
-
-  workspace_id = aws_prometheus_workspace.amp_ws[0].id
-
-  definition = var.alert_manager_config
-}
-
 resource "aws_iam_role" "amp_iam_role" {
   count = var.create_amp_iam_role ? 1 : 0
   name  = "amp_iam_role"
