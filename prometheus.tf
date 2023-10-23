@@ -73,9 +73,10 @@ module "managed_prometheus" {
   count  = var.enable_managed_prometheus == true ? 1 : 0
   source = "terraform-aws-modules/managed-service-prometheus/aws"
 
-  create_workspace = var.amp_create_workspace == true ? var.amp_create_workspace : false
-  workspace_id     = var.amp_workspace_id
-
+  create_workspace         = var.amp_create_workspace == true ? var.amp_create_workspace : false
+  workspace_id             = var.amp_workspace_id
+  alert_manager_definition = var.alert_manager_config
+  workspace_alias          = var.amp_ws_alias
   logging_configuration = {
     log_group_arn = "${aws_cloudwatch_log_group.amp_log_group.arn}:*"
   }
