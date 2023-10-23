@@ -10,7 +10,7 @@ output "managed_prometheus_workspace_endpoint" {
 
 output "managed_prometheus_workspace_id" {
   description = "Amazon Managed Prometheus workspace ID"
-  value       = aws_prometheus_workspace.amp_ws[0].id
+  value       = module.managed_prometheus[0].workspace_id
 }
 
 output "managed_grafana_workspace_endpoint" {
