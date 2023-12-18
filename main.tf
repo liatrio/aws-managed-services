@@ -55,7 +55,7 @@ module "managed_grafana" {
 }
 
 resource "aws_iam_role_policy" "grafana_xray_policy" {
-  depends_on = [ module.managed_grafana ]
+  depends_on = [module.managed_grafana]
 
   name = "GrafanaXrayDatasourcePolicy"
   role = module.managed_grafana.workspace_iam_role_arn
@@ -63,73 +63,73 @@ resource "aws_iam_role_policy" "grafana_xray_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "AllowReadingMetricsFromCloudWatch",
-            "Effect": "Allow",
-            "Action": [
-                "cloudwatch:DescribeAlarmsForMetric",
-                "cloudwatch:DescribeAlarmHistory",
-                "cloudwatch:DescribeAlarms",
-                "cloudwatch:ListMetrics",
-                "cloudwatch:GetMetricData",
-                "cloudwatch:GetInsightRuleReport"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "AllowReadingLogsFromCloudWatch",
-            "Effect": "Allow",
-            "Action": [
-                "logs:DescribeLogGroups",
-                "logs:GetLogGroupFields",
-                "logs:StartQuery",
-                "logs:StopQuery",
-                "logs:GetQueryResults",
-                "logs:GetLogEvents"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "AllowReadingTagsInstancesRegionsFromEC2",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:DescribeTags",
-                "ec2:DescribeInstances",
-                "ec2:DescribeRegions"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "AllowReadingResourcesForTags",
-            "Effect": "Allow",
-            "Action": "tag:GetResources",
-            "Resource": "*"
-        },
-        {
-            "Action": [
-                "oam:ListSinks",
-                "oam:ListAttachedLinks"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "xray:BatchGetTraces",
-                "xray:GetTraceSummaries",
-                "xray:GetTraceGraph",
-                "xray:GetGroups",
-                "xray:GetTimeSeriesServiceStatistics",
-                "xray:GetInsightSummaries",
-                "xray:GetInsight",
-                "xray:GetServiceGraph",
-                "ec2:DescribeRegions"
-            ],
-            "Resource": "*"
-        }
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "AllowReadingMetricsFromCloudWatch",
+        "Effect" : "Allow",
+        "Action" : [
+          "cloudwatch:DescribeAlarmsForMetric",
+          "cloudwatch:DescribeAlarmHistory",
+          "cloudwatch:DescribeAlarms",
+          "cloudwatch:ListMetrics",
+          "cloudwatch:GetMetricData",
+          "cloudwatch:GetInsightRuleReport"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "AllowReadingLogsFromCloudWatch",
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:DescribeLogGroups",
+          "logs:GetLogGroupFields",
+          "logs:StartQuery",
+          "logs:StopQuery",
+          "logs:GetQueryResults",
+          "logs:GetLogEvents"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "AllowReadingTagsInstancesRegionsFromEC2",
+        "Effect" : "Allow",
+        "Action" : [
+          "ec2:DescribeTags",
+          "ec2:DescribeInstances",
+          "ec2:DescribeRegions"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "AllowReadingResourcesForTags",
+        "Effect" : "Allow",
+        "Action" : "tag:GetResources",
+        "Resource" : "*"
+      },
+      {
+        "Action" : [
+          "oam:ListSinks",
+          "oam:ListAttachedLinks"
+        ],
+        "Effect" : "Allow",
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "xray:BatchGetTraces",
+          "xray:GetTraceSummaries",
+          "xray:GetTraceGraph",
+          "xray:GetGroups",
+          "xray:GetTimeSeriesServiceStatistics",
+          "xray:GetInsightSummaries",
+          "xray:GetInsight",
+          "xray:GetServiceGraph",
+          "ec2:DescribeRegions"
+        ],
+        "Resource" : "*"
+      }
     ]
   })
 }
