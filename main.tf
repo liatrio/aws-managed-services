@@ -1,4 +1,5 @@
 //TODO: Move the grafana module in the `modules/grafana` folder
+
 module "managed_grafana" {
   # This is a fork of the upstream community edition and will be set back to the published
   # module version once the fix for adding `nac_configuration` is merged upstream.
@@ -51,4 +52,84 @@ module "managed_grafana" {
   # vpc & nac configuration
   vpc_configuration = var.vpc_configuration
   nac_configuration = var.nac_configuration
+}
+
+resource "aws_iam_role_policy" "grafana_xray_policy" {
+  depends_on = [module.managed_grafana]
+
+  name = "GrafanaXrayDatasourcePolicy"
+  role = module.managed_grafana.workspace_iam_role_arn
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "AllowReadingMetricsFromCloudWatch",
+        "Effect" : "Allow",
+        "Action" : [
+          "cloudwatch:DescribeAlarmsForMetric",
+          "cloudwatch:DescribeAlarmHistory",
+          "cloudwatch:DescribeAlarms",
+          "cloudwatch:ListMetrics",
+          "cloudwatch:GetMetricData",
+          "cloudwatch:GetInsightRuleReport"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "AllowReadingLogsFromCloudWatch",
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:DescribeLogGroups",
+          "logs:GetLogGroupFields",
+          "logs:StartQuery",
+          "logs:StopQuery",
+          "logs:GetQueryResults",
+          "logs:GetLogEvents"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "AllowReadingTagsInstancesRegionsFromEC2",
+        "Effect" : "Allow",
+        "Action" : [
+          "ec2:DescribeTags",
+          "ec2:DescribeInstances",
+          "ec2:DescribeRegions"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "AllowReadingResourcesForTags",
+        "Effect" : "Allow",
+        "Action" : "tag:GetResources",
+        "Resource" : "*"
+      },
+      {
+        "Action" : [
+          "oam:ListSinks",
+          "oam:ListAttachedLinks"
+        ],
+        "Effect" : "Allow",
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "xray:BatchGetTraces",
+          "xray:GetTraceSummaries",
+          "xray:GetTraceGraph",
+          "xray:GetGroups",
+          "xray:GetTimeSeriesServiceStatistics",
+          "xray:GetInsightSummaries",
+          "xray:GetInsight",
+          "xray:GetServiceGraph",
+          "ec2:DescribeRegions"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
 }
