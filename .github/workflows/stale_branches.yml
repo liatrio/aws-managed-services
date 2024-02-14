@@ -15,7 +15,10 @@ jobs:
       - name: Run Stale Branch Action
         id: stale-branch-poc
         uses: liatrio/o11y-stale-branch-poc@v0.3.1
+        env:
+          OTEL_SERVICE_NAME: o11y-stale-branch-poc
+          OTEL_EXPORTER_OTLP_HEADERS: "Authorization: Basic ${{ secrets.OTLP_HEADERS }}"
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           stale-branch-age: '3 months'
-
