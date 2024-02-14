@@ -18,7 +18,7 @@ jobs:
         env:
           OTEL_TRACES_EXPORTER: otlp
           OTEL_SERVICE_NAME: o11y-stale-branch-poc
-          OTEL_EXPORTER_OTLP_HEADERS: "Authorization='Basic ${{ secrets.OTLP_HEADERS }}'"
+          OTEL_EXPORTER_OTLP_HEADERS: "Authorization=Basic ${{ secrets.OTLP_HEADERS }}"
           OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_ENDPOINT }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
