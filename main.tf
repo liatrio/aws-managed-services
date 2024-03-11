@@ -129,6 +129,19 @@ resource "aws_iam_role_policy" "grafana_xray_policy" {
           "ec2:DescribeRegions"
         ],
         "Resource" : "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "aps:ListRules",
+          "aps:ListAlertManagerSilences",
+          "aps:ListAlertManagerAlerts",
+          "aps:GetAlertManagerStatus",
+          "aps:ListAlertManagerAlertGroups",
+          "aps:PutAlertManagerSilences",
+          "aps:DeleteAlertManagerSilence"
+        ],
+        "Resource": "*"
       }
     ]
   })
