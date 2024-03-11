@@ -131,8 +131,8 @@ resource "aws_iam_role_policy" "grafana_xray_policy" {
         "Resource" : "*"
       },
       {
-        "Effect": "Allow",
-        "Action": [
+        "Effect" : "Allow",
+        "Action" : [
           "aps:ListRules",
           "aps:ListAlertManagerSilences",
           "aps:ListAlertManagerAlerts",
@@ -141,7 +141,7 @@ resource "aws_iam_role_policy" "grafana_xray_policy" {
           "aps:PutAlertManagerSilences",
           "aps:DeleteAlertManagerSilence"
         ],
-        "Resource": "*"
+        "Resource" : "*"
       }
     ]
   })
