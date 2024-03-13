@@ -1,11 +1,12 @@
 #tfsec:ignore:aws-cloudwatch-log-group-customer-key
 resource "aws_cloudwatch_log_group" "amp_log_group" {
-  name_prefix = "/o11y/amp/"
+  name_prefix = "/o11y/amp/${var.environment}/"
+  retention_in_days = var.aws_cloudwatch_log_group_retention_in_days
 }
 
 resource "aws_iam_role" "amp_iam_role" {
   count = var.create_amp_iam_role ? 1 : 0
-  name  = "amp_iam_role"
+  name  = "amp_iam_role_${var.environment}"
 
   assume_role_policy = <<EOF
 {
@@ -34,7 +35,7 @@ EOF
 #tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "amp_role_policy" {
   count = var.create_amp_iam_role ? 1 : 0
-  name  = "amp_role_policy"
+  name  = "amp_role_policy_${var.environment}"
   role  = aws_iam_role.amp_iam_role[0].id
   policy = jsonencode({
     Version = "2012-10-17"

@@ -22,6 +22,9 @@ module "managed_grafana" {
     unifiedAlerting = {
       enabled = true
     }
+    plugins = {
+      pluginAdminEnabled = false
+    }
   })
 
   # Workspace IAM role
@@ -57,8 +60,8 @@ module "managed_grafana" {
 resource "aws_iam_role_policy" "grafana_xray_policy" {
   depends_on = [module.managed_grafana]
 
-  name = "GrafanaXrayDatasourcePolicy"
-  role = module.managed_grafana.workspace_iam_role_arn
+  name = "GrafanaXrayDatasourcePolicy-${var.environment}"
+  role = module.managed_grafana.workspace_iam_role_name
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
