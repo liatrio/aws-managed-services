@@ -83,6 +83,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_amp_workspace_id"></a> [amp\_workspace\_id](#input\_amp\_workspace\_id) | If 'amp\_create\_workspace' is set to 'false' then a workspace has to be supplied. | `string` | `""` | no |
 | <a name="input_amp_ws_alias"></a> [amp\_ws\_alias](#input\_amp\_ws\_alias) | The alias of the AMP workspace | `string` | `"observability-amp-workspace"` | no |
 | <a name="input_authentication_providers"></a> [authentication\_providers](#input\_authentication\_providers) | List containing the methods used to authenticate. | `list(any)` | n/a | yes |
+| <a name="input_aws_cloudwatch_log_group_retention_in_days"></a> [aws\_cloudwatch\_log\_group\_retention\_in\_days](#input\_aws\_cloudwatch\_log\_group\_retention\_in\_days) | The retention period of the CloudWatch log group in days | `number` | `60` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | `"us-east-1"` | no |
 | <a name="input_aws_route53_zone_tags"></a> [aws\_route53\_zone\_tags](#input\_aws\_route53\_zone\_tags) | value of the private hosted zone tags | `map(string)` | `{}` | no |
 | <a name="input_create"></a> [create](#input\_create) | Determines whether a resources will be created | `bool` | `true` | no |
