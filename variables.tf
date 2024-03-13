@@ -281,3 +281,9 @@ variable "create_redirect" {
   default     = false
   description = "Whether to create a redirect from the S3 bucket to the workspace or not"
 }
+
+variable "aws_cloudwatch_log_group_retention_in_days" {
+  description = "The retention period of the CloudWatch log group in days"
+  type        = number
+  default     = 60
+}
