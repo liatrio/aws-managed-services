@@ -63,7 +63,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Run tfsec with reviewdog
-        uses: reviewdog/action-tfsec@v1.17.0
+        uses: reviewdog/action-tfsec@v1.23.0
         if: ${{ always() }}
         with:
           github_token: ${{ secrets.github_token }}
