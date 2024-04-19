@@ -1,6 +1,6 @@
 #tfsec:ignore:aws-cloudwatch-log-group-customer-key
 resource "aws_cloudwatch_log_group" "amp_log_group" {
-  name_prefix = "/o11y/amp/${var.environment}/"
+  name_prefix       = "/o11y/amp/${var.environment}/"
   retention_in_days = var.aws_cloudwatch_log_group_retention_in_days
 }
 
