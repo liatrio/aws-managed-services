@@ -94,7 +94,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_create_redirect"></a> [create\_redirect](#input\_create\_redirect) | Whether to create a redirect from the S3 bucket to the workspace or not | `bool` | `false` | no |
 | <a name="input_create_saml_configuration"></a> [create\_saml\_configuration](#input\_create\_saml\_configuration) | Flag to indicate whether or not to create a SAML configuratino in Grafana Workspace. | `string` | `false` | no |
 | <a name="input_create_workspace"></a> [create\_workspace](#input\_create\_workspace) | Determines whether a workspace will be created or to use an existing workspace | `bool` | `true` | no |
-| <a name="input_data_sources"></a> [data\_sources](#input\_data\_sources) | List of data sources to create in the workspace | `list(string)` | <pre>[<br>  "CLOUDWATCH",<br>  "PROMETHEUS",<br>  "XRAY"<br>]</pre> | no |
+| <a name="input_data_sources"></a> [data\_sources](#input\_data\_sources) | List of data sources to create in the workspace | `list(string)` | <pre>[<br/>  "CLOUDWATCH",<br/>  "PROMETHEUS",<br/>  "XRAY"<br/>]</pre> | no |
 | <a name="input_enable_alertmanager"></a> [enable\_alertmanager](#input\_enable\_alertmanager) | Creates Amazon Managed Service for Prometheus AlertManager for all workloads | `bool` | `false` | no |
 | <a name="input_enable_managed_prometheus"></a> [enable\_managed\_prometheus](#input\_enable\_managed\_prometheus) | Creates a new Amazon Managed Service for Prometheus Workspace | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name | `string` | n/a | yes |
@@ -109,7 +109,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_nac_configuration"></a> [nac\_configuration](#input\_nac\_configuration) | The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to | `any` | `{}` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the deployment | `string` | `"aws-o11y-managed-services"` | no |
 | <a name="input_route53_hosted_zone_name"></a> [route53\_hosted\_zone\_name](#input\_route53\_hosted\_zone\_name) | value of the private hosted zone name | `string` | `""` | no |
-| <a name="input_s3_website_endpoint_zone_ids"></a> [s3\_website\_endpoint\_zone\_ids](#input\_s3\_website\_endpoint\_zone\_ids) | S3 website endpoint zone IDs by region | `map(string)` | <pre>{<br>  "us-east-1": "Z3AQBSTGFYJSTF",<br>  "us-west-1": "Z2F56UZL2M1ACD",<br>  "us-west-2": "Z3BJ6K6RIION7M"<br>}</pre> | no |
+| <a name="input_s3_website_endpoint_zone_ids"></a> [s3\_website\_endpoint\_zone\_ids](#input\_s3\_website\_endpoint\_zone\_ids) | S3 website endpoint zone IDs by region | `map(string)` | <pre>{<br/>  "us-east-1": "Z3AQBSTGFYJSTF",<br/>  "us-west-1": "Z2F56UZL2M1ACD",<br/>  "us-west-2": "Z3BJ6K6RIION7M"<br/>}</pre> | no |
 | <a name="input_saml_admin_role_values"></a> [saml\_admin\_role\_values](#input\_saml\_admin\_role\_values) | Name of the admin role value. | `list(any)` | `[]` | no |
 | <a name="input_saml_editor_role_values"></a> [saml\_editor\_role\_values](#input\_saml\_editor\_role\_values) | Name of the editor role value. | `list(any)` | `[]` | no |
 | <a name="input_saml_email_assertion"></a> [saml\_email\_assertion](#input\_saml\_email\_assertion) | Name of the saml email used for assertion. | `string` | `""` | no |
@@ -119,7 +119,7 @@ When you set up NAC the VPC endpoint URL will not have a route to the public URL
 | <a name="input_saml_name_assertion"></a> [saml\_name\_assertion](#input\_saml\_name\_assertion) | Display name for SAML. | `string` | `""` | no |
 | <a name="input_saml_org_assertion"></a> [saml\_org\_assertion](#input\_saml\_org\_assertion) | Name of the org used for assertion. | `string` | `""` | no |
 | <a name="input_saml_role_assertion"></a> [saml\_role\_assertion](#input\_saml\_role\_assertion) | Name of the role used for assertion. | `string` | `""` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `map('BusinessUnit`,`XYZ`) | `map(string)` | <pre>{<br>  "GithubOrg": "aws-observability",<br>  "GithubRepo": "terraform-aws-observability-accelerator"<br>}</pre> | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `map('BusinessUnit`,`XYZ`) | `map(string)` | <pre>{<br/>  "GithubOrg": "aws-observability",<br/>  "GithubRepo": "terraform-aws-observability-accelerator"<br/>}</pre> | no |
 | <a name="input_use_iam_role_name_prefix"></a> [use\_iam\_role\_name\_prefix](#input\_use\_iam\_role\_name\_prefix) | Whether or not to use a prefix on the IAM Role name | `bool` | `true` | no |
 | <a name="input_vpc_configuration"></a> [vpc\_configuration](#input\_vpc\_configuration) | The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to | `any` | `{}` | no |
 | <a name="input_vpc_ids"></a> [vpc\_ids](#input\_vpc\_ids) | List of VPC IDs | `list(string)` | `[]` | no |
